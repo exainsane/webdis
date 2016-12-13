@@ -1,0 +1,49 @@
+#imgheader{
+    padding: 5px;
+    height: 100%;
+    width: auto;
+}
+/*.slider-wrapper{
+    height: 100%;
+    overflow: hidden;
+}*/
+*{
+    padding: 0;
+    margin: 0;
+}
+.desc-section{    
+    margin-top: 60px;
+}
+.desc-section img{    
+    height: auto;
+    width: 100%;
+}
+.login-section{
+    clear: both;
+    margin: 70px 0px 70px 0px;
+}
+.slides img{
+    filter: blur(5px);
+}
+.slides .btn{    
+    background: rgba(0, 121, 107, 0.64) !important;
+}
+.slides .caption{
+    display: block;
+    padding: 15px 15px 15px 15px;
+    background: rgba(0,0,0,.4);
+    border-radius: 5px;
+}
+#login-card{
+
+}
+a.goto{
+    width: 300px;
+    height: 74px;
+    font-size: 30px;
+    line-height: 74px;
+}
+div.logpanel{
+    width: 299px;
+    display: inline-block;
+}

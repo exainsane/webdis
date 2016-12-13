@@ -1,0 +1,146 @@
+<html>
+    <head>
+        <script src="assets/js/jquery.js"></script>
+        <script src="assets/js/materialize.min.js"></script>
+        <script src="assets/js/app.js"></script>
+
+        <link rel="stylesheet" href="assets/css/materialize.min.css">
+        <link rel="stylesheet" href="assets/css/app.css">
+
+        <script>
+            $(function(){
+                 $('.slider').slider({
+                     full_width: true,
+                     indicators:false,
+                     height:($(window).height() - $("#header").height())
+                    });
+            });
+        </script>
+    </head>
+    <body>        
+        <div class="navbar-fixed" id="header">
+            <nav class="deep-orange accent-3">
+                <div class="container">
+                    <img src="assets/images/ayojajanlogo.png" alt="" id="imgheader">
+                    <ul class="right">
+                        <li><a href="#">Apa itu AyoJajan</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+            </nav>        
+        </div>      
+        <div class="slider-wrapper theme-dark">
+            <div class="slider">
+                <ul class="slides">
+                    <li>
+                        <img src="assets/images/slider/4.jpg"> <!-- random image -->
+                        <div class="caption center-align">                    
+                        <h3 class="light grey-text text-lighten-3">Kini Jajan Bisa Di Mana Saja</h3>
+                        <h1>Temukan Jajanmu!</h1>
+                        <a href="#sect-login" class="btn btn-flat teal darken-2 white-text goto">Start</a>
+                        </div>
+                    </li>
+					<li>
+                        <img src="assets/images/slider/2.jpg"> <!-- random image -->
+                        <div class="caption left-align">                    
+                        <h3 class="light grey-text text-lighten-3">
+                            Bring your food to your gadget!
+                        </h3>
+                        <h1>Lihat Bagaimana Kami Bekerja</h1>
+                        <a href="#sect-login" class="btn btn-flat teal darken-2 white-text goto">Lanjut</a>
+                        </div>
+                    </li>
+					<li>
+                        <img src="assets/images/slider/3.jpg"> <!-- random image -->
+                        <div class="caption right-align">                    
+                            <h3 class="light grey-text text-lighten-3">Tagline3</h3>
+                            <h1>Temukan Jajanmu!</h1>
+                            <a href="#sect-login" class="btn btn-flat teal darken-2 white-text goto">Start</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="desc-section" id="sect-login">
+            <div class="row">
+                <div class="col offset-l2 l8 s12">
+                    <div class="row">
+                        <div class="col s12 l2"><img src="assets/images/logo_notext.png" alt=""></div>
+                        <div class="col s12 l10">
+                            <h4>Login ke AyoJajan!<br>Dan Temukan Jajanan yang Kamu Cari!</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="login-section">
+            <div class="row">
+                <div class="col offset-l2 l8 s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <blockquote><h4>Login/Register</h4></blockquote>
+                            <div class="row">
+                                <div class="col s12 l6 m6">
+                                    <div class="input-field">
+                                        <input type="text">
+                                        <label for="">Your Username</label>
+                                    </div>
+                                    <div class="input-field">
+                                        <input type="password">
+                                        <label for="">Your Password</label>
+                                    </div>
+                                    <a class="btn btn-flat green white-text" href="main-mapped.html">Log In</a>
+                                </div>
+                                <div class="col s12 l6 m6" style="border-left:1px solid #ececec">
+                                    <div class="input-field">
+                                        <input type="email">
+                                        <label for="">Your Email</label>
+                                    </div>
+                                    <div class="input-field">
+                                        <input type="text">
+                                        <label for="">Pick a Username</label>
+                                    </div>
+                                    <div class="input-field">
+                                        <input type="password">
+                                        <label for="">Pick a Password</label>
+                                    </div>
+                                    <div class="input-field">
+                                        <input type="password">
+                                        <label for="">Re-type your Password</label>
+                                    </div>
+                                    <button class="btn btn-flat white-text right red">Sign Up</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="page-footer deep-orange accent-3">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">AyoJajan</h5>
+                <p class="grey-text text-lighten-4">Temukan cara baru dalam menemukan jajanmu!</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Mata Kuliah Desain Web 105</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="#!">Alghi Fari Herlambang</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Kevin Ramadhan K</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Miftahul Zannah</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Putri Pratiwi</a></li>
+                  <li><a href="#" class="grey-text text-lighten-3">Ridwan Achadi Nugroho</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+                &copy; 2016 Exairie
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+          </div>
+        </footer>
+    </body>
+</html>

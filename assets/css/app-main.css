@@ -1,0 +1,391 @@
+.pageheading{    
+    border-bottom: 1px solid #ececec;
+    padding: 20px 10px 10px 10px;
+}
+.pageheading img{
+    height: 45px;
+    width: auto;
+}
+
+.pageheading ul li{
+    display: inline-block;
+    vertical-align: middle;
+}
+.pageheading li a{
+    font-size: 18px;
+    display: block;
+    padding: 5px 10px 5px 10px;
+}
+#map{
+    width: 100%;
+    background: url(../images/map.jpg);
+    background-repeat: no-repeat;    
+    background-size: cover;
+}
+div#overlay{
+    display: none;     
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.58);
+    z-index: 10;
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    transition: all .4s ease-out;
+
+}
+.wnd{
+    z-index: 11;
+}
+.row.normalmargin{
+    margin-bottom: 10px;
+}
+div.detailcard .row{
+    margin: 10px 0px 10px 0px;
+}
+div.detailcard .row .col:nth-child(2){
+    font-weight: bold;
+}
+div.popup-window.best-products{
+    display: none;
+    background: rgba(255,255,255,1);
+    width: 75%;
+    height: 90%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 6px;
+    top: 0px;
+    transform: scale(1.05);
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    position: fixed;
+    opacity: 0;
+    transition: opacity .25s ease-in, transform .3s ease-out;
+}
+.best-products-list a{
+    display: inline-block;
+    vertical-align: middle;
+    width: 48%;   
+    margin: 5px;
+}
+.best-products-list a .item{
+    background: #039be5  ;
+    color: white;
+    width: 100%;
+    position: relative;
+    height: 100px;
+    padding: 10px;
+}
+.best-products-list a .item img, .best-products-list a .item .name{
+    display: inline-block;
+    vertical-align: middle;
+}
+.best-products-list a .item img{
+    height: 100%;
+}
+.best-products-list a .item .name span:nth-child(1){
+    
+    font-size: 23px;
+}
+.best-products-list a .item .prod-rating{
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+}
+.best-products-list a .item .prod-rating > *{
+    display: inline-block;
+    vertical-align: middle;
+}
+.best-products-list a .item .prod-rating img{
+    width: 40px;
+    height: auto;
+}
+div.popup-window.best-sellers{
+    display: none;
+    background: rgba(255,255,255,1);
+    width: 75%;
+    height: 90%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 6px;
+    top: 0px;
+    transform: scale(1.05);
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    position: fixed;
+    opacity: 0;
+    transition: opacity .25s ease-in, transform .3s ease-out;
+}
+.best-sellers-list a{
+    display: inline-block;
+    vertical-align: middle;
+    width: 32%;   
+    margin: 5px;
+}
+.best-sellers-list a .item{
+    background: #f57c00;
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+}
+.best-sellers-list a .item img, .best-sellers-list a .item .name{
+    display: inline-block;
+    vertical-align: middle;
+}
+.best-sellers-list a .item img{
+    height: 100%;
+}
+.best-sellers-list a .item .name span{
+    color: white;
+    font-size: 23px;
+}
+.best-sellers .row:nth-child(1){
+    border-bottom: 1px solid rgba(148, 148, 148, 0.47);
+}
+div.popup-window.chat{
+    display: none;
+    /*background: rgba(255,255,255,1);*/
+    width: 75%;
+    height: 90%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 6px;
+    top: 0px;
+    transform: scale(0.97);
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    position: fixed;
+    opacity: 0;
+    transition: opacity .25s ease-in, transform .3s ease-out;
+}
+div.popup-window.profile{
+    display: none;
+    background: rgba(255,255,255,1);
+    width: 40%;
+    height: 75%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 20px;
+    top: -30px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    position: fixed;
+    opacity: 0;
+    transition: all .3s ease-in;
+}
+@media screen and (max-width:800px){
+    div.popup-window.profile{
+        width: 99%!important;
+    }
+}
+div.popup-window .headlogo img{
+    width: 100%;
+    height: auto;
+}
+.expand{
+    width: 100%;
+}
+.rating{
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    background-size: cover;
+}
+.rating.star-black{
+    background-image: url(../images/rate-black.png)
+}
+.rating.star-yellow{
+    background-image: url(../images/rate-yellow.png)
+}
+.rating.star-white{
+    background-image: url(../images/rate-white.png)
+}
+.imgs-horizontal-list{
+    
+}
+.imgs-horizontal-list img{
+    width: 70px;
+    height: 70px;
+    display: inline-block;
+    margin: 1px;
+    vertical-align: middle;
+}
+.material-placeholder{
+    display: inline-block;
+    vertical-align: middle;
+}
+.materialbox-overlay{
+    display: none!important;
+}
+#profilebtns{
+    margin: 41px 0px 0px 0px;
+}
+.removescroll{
+    height: 70px;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+.removescroll::-webkit-scrollbar{
+    display: none;    
+}
+.chat, .chat .chatheader{
+    background: #efefef;
+}
+.chat .chatheader{
+    margin-bottom: 5px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+}
+.chat .chatheader img, .chat .chatcontact img{
+    display: inline-block;
+    vertical-align: middle;
+}
+.chat .chatheader img{
+    
+    margin-right: 10px;
+    width: 36px;
+    
+}
+.chat .chatcontact{
+    cursor: pointer;
+    padding: 5px;
+    transition: all .3s ease-in;
+    border-bottom: 1px solid rgba(160, 160, 160, 0.68);
+}
+.chat .chatcontact:hover{    
+    background: rgba(191, 191, 191, 0.46);
+}
+.chat .chatcontact img{
+    width: 30px;
+}
+.chat .chatheader h4, .chat .chatheader h5, .chat .chatcontact h6{
+    display: inline-block;
+    vertical-align: middle;
+    margin: 10px;
+}
+.chat .contactlist{
+    height: 80%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin-bottom: 0;
+}
+/*.chat .contactlist::-webkit-scrollbar{
+    display: none;
+}*/
+.chatwindow{
+    background: white;
+    height: 74%;
+    width: 100%;
+    padding-top: 10px!important;
+    padding-bottom: 10px!important;
+    border-radius: 1px;
+    box-shadow: 0px 0px 3px #797979;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+*::-webkit-scrollbar{
+    position: absolute;
+    padding-left:5px;
+    padding-right:5px;
+    height:100%;
+    width:10px;
+    background:rgba(125,125,125,.25);        
+}
+*::-webkit-scrollbar-thumb{    
+    height:100px;
+    background:#888;
+    width:90%;
+    border-radius:10px;    
+}
+
+.nullmargin{
+    margin: 0;
+}
+.chatbubble{
+    font-size: 16px;
+    font-family: 'Segoe UI', Verdana, sans-serif;    
+    position: relative;
+    display: block;
+    min-height: 50px;    
+    padding: 22px 10px 10px 10px!important;
+    margin: 10px 0px 0px 0px;
+    
+}
+.chatbubble.chat-received:before{
+    content: " ";
+    display: block;
+    top: 0;
+    left: -8px;
+    position: absolute;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 8px solid #2196f3;
+}
+.chatbubble.chat-received{
+    border-top-right-radius: 4px;
+    /*border-top-left-radius: 4px;*/
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+
+    background: #2196f3;
+    color: white;
+    margin-left: 16px!important;
+}
+.chatbubble.chat-sent{
+    /*border-top-right-radius: 4px;*/
+    border-top-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+
+    background: #1de9b6;
+    margin-right: 16px!important;
+}
+.chatbubble.chat-sent:after{
+    content: " ";
+    display: block;
+    top: 0;
+    right: -8px;
+    position: absolute;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid #1de9b6;
+}
+.chatbubble .timelabel{
+    display: block;
+    position: absolute;
+    margin: 0;
+    top: 3px;
+    font-size: 13px;
+    font-style: italic;
+}
+.bottombuttons{
+    padding-top: 10px;
+    max-height: 80px;
+    overflow: hidden;
+}
+.bottombuttons a{
+    display: inline-block;
+    width: 22%;
+    vertical-align: middle;
+}
+#chatinput{
+    background: white;
+    border: 1px solid #ececec;
+    margin: 0;
+    padding-left: 10px;
+}
+#mcwindow div.row:nth-child(3){
+    margin-top: 10px;
+}
