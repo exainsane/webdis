@@ -13,6 +13,9 @@ $(function(){
 		Credential.removeCredential();
 		PageRedirect("index.html");
 	})
+	$(".guestlogin").click(function(){
+		PageRedirect("index.html#sect-login");
+	});
 	//$(".imgs-horizontal-list img").materialbox();
 });
 function ApplyCredentialInfo(){
@@ -21,6 +24,7 @@ function ApplyCredentialInfo(){
 	$(".accountname").html(isLoggedIn == true?Credential.getCurrentUserDetail().name:"Guest Login");
 	$(".accountjoindate").html("Joined "+(isLoggedIn == true?Credential.getCurrentUserDetail().join_date:"-"));
 	$(".logoutbtn").css("display",(isLoggedIn == true?"inline":"none"));	
+	$(".guestlogin").css("display",(isLoggedIn == false?"inline":"none"));	
 }
 function Sound(source,volume,loop)
 {

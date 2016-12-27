@@ -34,6 +34,10 @@
                         },3000);
                     }
                 });
+                $("#guestloginbtn").click(function(e){
+                    e.preventDefault();
+                    PageRedirect("main-mapped.html");
+                });
             });
         </script>
     </head>
@@ -157,6 +161,7 @@
                                         <span class="red-text">Error! Username/password salah</span>
                                     </div>
                                     <a class="btn btn-flat green white-text" href="javascript:void(0)" id="loginbtn">Log In</a>
+                                    <a class="right btn btn-flat blue white-text" href="javascript:void(0)" id="guestloginbtn">Guest Log In</a>
                                 </div>
                                 <div class="col s12 l6 m6" style="border-left:1px solid #ececec">
                                     <div class="input-field">

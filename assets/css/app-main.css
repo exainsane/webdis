@@ -535,7 +535,7 @@ img#profpic{
 .side-nav li:hover, .side-nav li:active{
     background: transparent;
 }
-.logoutbtn{
+.logoutbtn, .guestlogin{
     border:1px solid #eaeaea;
 }
 @media screen and (max-width: 993px) and (min-width: 750px){
