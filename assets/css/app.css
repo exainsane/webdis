@@ -1,3 +1,8 @@
+.redirect-overlay{
+    opacity: 0;
+    filter:blur(15px);
+    display: none;
+}
 #imgheader{
     padding: 5px;
     height: 100%;
@@ -17,6 +22,9 @@
 .desc-section img{    
     height: auto;
     width: 100%;
+    position: relative;
+    display: block;
+    margin: 0px auto;
 }
 .login-section{
     clear: both;
@@ -46,4 +54,12 @@ a.goto{
 div.logpanel{
     width: 299px;
     display: inline-block;
+}
+#loginerrornotify{
+    display: none;
+}
+@media screen and (max-width: 993px){
+    .desc-section img{    
+
+    }
 }

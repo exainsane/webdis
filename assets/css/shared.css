@@ -1,0 +1,51 @@
+.redirect-overlay{
+	display: block;
+	margin: 0;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: black;
+	z-index: 1000;
+	transition:opacity .3s ease, filter .5s ease-out;
+
+	/*Put in separate file*/
+	
+}
+.redirect-preloader{
+	position: fixed;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 450px;
+	height: auto;
+}
+.redirect-loadnotif{
+	position: fixed;
+    display: block;
+    left: 0;
+    top: 0;
+    bottom: -137px;
+    right: 0;
+    margin: auto;
+    width: 50%;
+    height: 35px;
+    text-align: center;
+    color: #2196f3;
+    font-size: 25px;
+}
+.redirect-img{
+	position: fixed;
+    display: block;
+    left: 0;
+    top: 0;
+    bottom: 232px;
+    right: 0;
+    margin: auto;
+    width: 302px;
+    /* height: 178px; */
+    text-align: center;
+    color: #2196f3;
+    font-size: 25px;
+}

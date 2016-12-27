@@ -1,10 +1,29 @@
+/*Preloader start*/
+.redirect-overlay{
+    opacity: 1;
+    filter:none;
+    display: block;
+}
+/*Preloader end*/
 .pageheading{    
     border-bottom: 1px solid #ececec;
     padding: 20px 10px 10px 10px;
 }
-.pageheading img{
-    height: 45px;
+body{
+    background: rgb(234,234,234);
+}
+#sidenav{
+    background: black;
+    color: white;
+}
+
+.titlebar img{
+    height: 72px;
     width: auto;
+    /* display: inline-block; */
+    margin: 5px auto;
+    vertical-align: middle;
+    display: block;
 }
 
 .pageheading ul li{
@@ -49,6 +68,43 @@ div.detailcard .row{
 }
 div.detailcard .row .col:nth-child(2){
     font-weight: bold;
+}
+div.popup-window.searches{
+    display: none;
+    background: rgba(255,255,255,1);
+    width: 55%;
+    height: 60%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 6px;
+    top: 0px;
+    transform: scale(1.05);
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    position: fixed;
+    opacity: 0;
+    transition: opacity .25s ease-in, top .3s ease-out;
+}
+#searchhistory{
+    padding: 10px;
+}
+div.searchentry{
+    display: inline-block;
+    padding: 10px;
+    vertical-align: middle;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    cursor: pointer;
+    transition:all .35s ease;
+    color: black;
+    margin-right: 9px;
+    margin-bottom: 5px;
+}
+div.searchentry:hover{
+    background: #4caf50;
+    color: white;
 }
 div.popup-window.best-products{
     display: none;
@@ -295,7 +351,7 @@ div.popup-window .headlogo img{
     overflow-x: hidden;
     overflow-y: auto;
 }
-*::-webkit-scrollbar{
+/**::-webkit-scrollbar{
     position: absolute;
     padding-left:5px;
     padding-right:5px;
@@ -308,7 +364,7 @@ div.popup-window .headlogo img{
     background:#888;
     width:90%;
     border-radius:10px;    
-}
+}*/
 
 .nullmargin{
     margin: 0;
@@ -321,7 +377,8 @@ div.popup-window .headlogo img{
     min-height: 50px;    
     padding: 22px 10px 10px 10px!important;
     margin: 10px 0px 0px 0px;
-    
+    transition:opacity .4s ease-out;
+    opacity: 0;
 }
 .chatbubble.chat-received:before{
     content: " ";
@@ -375,11 +432,6 @@ div.popup-window .headlogo img{
     max-height: 80px;
     overflow: hidden;
 }
-.bottombuttons a{
-    display: inline-block;
-    width: 22%;
-    vertical-align: middle;
-}
 #chatinput{
     background: white;
     border: 1px solid #ececec;
@@ -388,4 +440,185 @@ div.popup-window .headlogo img{
 }
 #mcwindow div.row:nth-child(3){
     margin-top: 10px;
+}
+input[name="searchbar"]{
+    display: inline-block;
+    width: auto;
+    width: 100%;
+    margin: 0px 0px 0px 25px;
+    vertical-align: middle;
+    background: #fff;
+    border-radius: 3px;
+    border: 1px solid #dadada;
+    padding: 0px 0px 0px 10px;
+}
+input[name='searchbar']:focus{
+    border-color: #039be5;
+}
+.linkright{
+    margin: 0;
+}
+div.imgprvoverlay{    
+    display: none;     
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.58);
+    z-index: 15;
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    transition: all .4s ease-out;
+}
+img#imgprv{
+    display: none;     
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 80%;
+    width: auto;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.58);
+    z-index: 16;
+    opacity: 0;
+    transform:scale(0.95);
+    transition: all .25s ease-out;
+}
+span.titlebar{
+    display: block;
+    background: rgb(23, 23, 23);
+    padding: 7px 5px 7px 5px;
+    color: white;
+    font-size: 21px;
+    text-transform: uppercase;
+}
+span.titlebar > i.fa{
+    margin-right: 15px;
+}
+div.col.leftbar{
+    position: relative;
+    background: black;
+    padding-left: 0;
+    padding-right: 0;
+    color: white;
+    height: 100%;
+}
+.leftbar span.accountname{
+    font-size: 1.35em;
+    display: block;
+}
+img#profpic{
+    border: 1px solid #333;
+    width: 100%;
+    display: block;
+    position: relative;
+    border-radius: 50%;
+    margin: 0px auto;
+}
+.leftbar div.col.links{
+    position: absolute;
+    bottom: 0;
+}
+.leftbar div.col.links > a{
+    display: block;
+    margin: 10px;
+    text-align: left;
+}
+.closebtn{
+    font-size: 30px!important;
+}
+.side-nav li:hover, .side-nav li:active{
+    background: transparent;
+}
+.logoutbtn{
+    border:1px solid #eaeaea;
+}
+@media screen and (max-width: 993px) and (min-width: 750px){
+    .pageheading{
+        border-color: transparent;
+    }
+    .pageheading .col img, .pageheading .col input{
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .pageheading .col img{
+        width: 150px;
+    }
+    .pageheading .col input{
+        width: auto;
+        margin: 0px;
+    }
+    body{
+        background: black;
+    }
+}
+@media screen and (max-width: 600px){
+    .pageheading .col img{
+        width: 160px;
+        margin: 0px auto!important;
+        display: block!important;
+    }
+    .pageheading i.fa-navicon{
+        position: absolute;
+    }
+}
+@media screen and (max-width: 750px){
+    .pageheading{
+        position: absolute;
+        top: 0;
+        z-index: 3;
+        width: 100%;
+        background: rgba(0,0,0,.25);
+    }
+    .pageheading .col img, .pageheading .col input{
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .pageheading .col img{
+        width: 150px;
+    }
+    .pageheading .col input{
+        width: 100%;
+        margin: 0px;
+    }
+    .maincontent{
+        position: relative;
+        padding: 0!important;
+    }
+    .pageheading a{
+        color: white;
+    }
+}
+
+@media screen and (max-width:993px){
+    div.popup-window.profile{
+        width: 99%!important;
+        bottom: 0;
+    }
+    div.popup-window.searches{
+        width: 99%!important;
+    }
+    div.popup-window.best-products{
+        width: 99%!important;
+    }
+    .best-products-list a{
+        display: block;        
+        width: 99%;
+    }
+    
+    div.popup-window.best-sellers{
+        width: 99%!important;
+    }
+    .best-sellers-list a{
+        display: block;
+        width: 99%;
+    }
+    div.popup-window.searches{
+        width: 99%!important;
+    }
 }

@@ -5,9 +5,58 @@ $(function(){
 			scrollTop:($(id).offset().top - 124)
 		},1300);
 	});
+	$(".button-collapse").sideNav();
 
+	ApplyCredentialInfo();
+
+	$(".logoutbtn").click(function(){
+		Credential.removeCredential();
+		PageRedirect("index.html");
+	})
 	//$(".imgs-horizontal-list img").materialbox();
 });
+function ApplyCredentialInfo(){
+	var isLoggedIn = Credential.isLoggedIn();
+
+	$(".accountname").html(isLoggedIn == true?Credential.getCurrentUserDetail().name:"Guest Login");
+	$(".accountjoindate").html("Joined "+(isLoggedIn == true?Credential.getCurrentUserDetail().join_date:"-"));
+	$(".logoutbtn").css("display",(isLoggedIn == true?"inline":"none"));	
+}
+function Sound(source,volume,loop)
+{
+    this.source=source;
+    this.volume=volume;
+    this.loop=loop;
+    var son;
+    this.son=son;
+    this.finish=false;
+    this.stop=function()
+    {
+        document.body.removeChild(this.son);
+    }
+    this.start=function()
+    {
+		var a = $("<audio id=\"audio\"><source src=\""+ this.source +"\" type=\"audio/ogg\">");
+		a.css("display","none");
+		$("body").append(a);
+		document.getElementById("audio").play();		
+		setTimeout(function(){
+			$("#audio").remove();
+		},2000);
+        if(this.finish)return false;
+    }
+    this.remove=function()
+    {
+        document.body.removeChild(this.son);
+        this.finish=true;
+    }
+    this.init=function(volume,loop)
+    {
+        this.finish=false;
+        this.volume=volume;
+        this.loop=loop;
+    }
+}
 function resizeChat(){
 	var cwin = $("div.popup-window.wnd.chat");
 	var cwinpart = $("#mcwindow");
@@ -25,28 +74,30 @@ function resizeChat(){
 
 	$(".chatwindow").css("height",winHeight + "px");
 }
-function App(map){
-	this.markers = [];
+function App(map){	
 	var mapElementName = "map";
 	var overlay = "#overlay"; 
 	var popupProfile = ".popup-window.profile";
 	var popupChat = ".popup-window.chat";
 	var popupBestSellers = ".popup-window.best-sellers";			
 	var popupBestProducts = ".popup-window.best-products";
+	var popupSearchHistory = ".popup-window.searches";
 	var mapobj = map;	
-	this.data = [];
+	
 	var profile_open = false;
 	var chat_open = false;
 	var sellers_open = false;
-	var products_open = false;
-	
+	var products_open = false;	
+	var searches_open = false;	
 
-	var data = "[{\"lat\":-6.196562, \"lng\":106.887132, \"Owner\":\"Ridwan AN\",\"title\":\"Siomay Mang Jago\",\"products\":[{\"nama\":\"Kebab\",\"harga\":15000,\"rating\": 4.5}, {\"nama\":\"Es Buble\",\"harga\":7000,\"rating\": 4.0}, {\"nama\":\"Sate\" ,\"harga\":15000,\"rating\": 2.5}, {\"nama\":\"Bubur Ayam\",\"harga\":10000,\"rating\": 2.3}]}, {\"lat\":-6.195266, \"lng\":106.884707, \"Owner\":\"Ridwan AN\",\"title\":\"Bakso Bakar Malang\",\"products\":[{\"nama\":\"Mie Ayam\",\"harga\":10000,\"rating\": 2.5}, {\"nama\":\"Teh Tarik\",\"harga\":7000,\"rating\": 2.7}, {\"nama\":\"Telur Steam\",\"harga\":5000,\"rating\": 3.7}]}, {\"lat\":-6.191677, \"lng\":106.897319, \"Owner\":\"Ridwan AN\",\"title\":\"Mie Ayam\",\"products\":[{\"nama\":\"Nasi Goreng\",\"harga\":12000,\"rating\": 3.5}, {\"nama\":\"Mie Ayam\",\"harga\":10000,\"rating\": 2.5}, {\"nama\":\"Pan Cake\",\"harga\":10000,\"rating\": 4.0}, {\"nama\":\"Es Doger\",\"harga\":5000,\"rating\": 3.0} ]}, {\"lat\":-6.201596, \"lng\":106.880612, \"Owner\":\"Ridwan AN\",\"title\":\"Gerobaktagor Uye\",\"products\":[{\"nama\":\"Siomay\",\"harga\":5000,\"rating\": 3.3}, {\"nama\":\"Batagor\",\"harga\":5000,\"rating\": 4.7}]}, {\"lat\":-6.203249, \"lng\":106.878241, \"Owner\":\"Miftahul Zannah\",\"title\":\"Jasuke Pengkolan\",\"products\":[{\"nama\":\"Jagung Susu Keju\",\"harga\":8000,\"rating\": 4.0}, {\"nama\":\"Jagung Susu Keju Coklat\",\"harga\":8000,\"rating\": 4.0}]}, {\"lat\":-6.202572, \"lng\":106.882232, \"Owner\":\"Miftahul Zannah\",\"title\":\"Warto Warung Soto\",\"products\":[{\"nama\":\"Mie Ayam\",\"harga\":10000,\"rating\": 2.5}, {\"nama\":\"Soto Mie\",\"harga\":10000,\"rating\": 2.3}, {\"nama\":\"Es Buble\",\"harga\":7000,\"rating\": 4.0}, {\"nama\":\"Es Campur\",\"harga\":8000,\"rating\": 3.7}, {\"nama\":\"Sate\" ,\"harga\":15000,\"rating\": 2.5}, {\"nama\":\"Cimol\",\"harga\":5000,\"rating\": 3.3}]}, {\"lat\":-6.200919, \"lng\":106.884233, \"Owner\":\"Miftahul Zannah\",\"title\":\"Kedai Kebab\",\"products\":[{\"nama\":\"Kebab\",\"harga\":15000,\"rating\": 4.5}, {\"nama\":\"Burger\",\"harga\":10000,\"rating\": 4.3}]}, {\"lat\":-6.201319, \"lng\":106.883986, \"Owner\":\"Miftahul Zannah\",\"title\":\"Ayam bakar\",\"products\":[{\"nama\":\"Nasi Goreng\",\"harga\":12000,\"rating\": 3.5}, {\"nama\":\"Mie Ayam\",\"harga\":10000,\"rating\": 2.5}, {\"nama\":\"Pan Cake\",\"harga\":10000,\"rating\": 4.0}, {\"nama\":\"Tahu Bulat\",\"harga\":5000,\"rating\": 3.7}, {\"nama\":\"Ayam Bakar\",\"harga\":15000,\"rating\": 4.7}, {\"nama\":\"Roti Bakar Isi\",\"harga\":12000,\"rating\": 3.0}, {\"nama\":\"Soft Drink\",\"harga\":7000,\"rating\": 4.7}, {\"nama\":\"Jamur Crispy\",\"harga\":10000,\"rating\": 3.0}]}, {\"lat\":-6.201522, \"lng\":106.885815, \"Owner\":\"Kevin RK\",\"title\":\"Warung Pinggiran\",\"products\":[{\"nama\":\"Nasi Goreng\",\"harga\":12000,\"rating\": 3.5}, {\"nama\":\"Batagor\",\"harga\":5000,\"rating\": 4.7}, {\"nama\":\"Capcin\",\"harga\":5000,\"rating\": 5.0}, {\"nama\":\"Es Buble\",\"harga\":7000,\"rating\": 4.0}, {\"nama\":\"Es Campur\",\"harga\":8000,\"rating\": 3.7}, {\"nama\":\"Es Doger\",\"harga\":5000,\"rating\": 3.0}, {\"nama\":\"Teh Tarik\",\"harga\":7000,\"rating\": 2.7}]}, {\"lat\":-6.200378, \"lng\":106.882279, \"Owner\":\"Kevin RK\",\"title\":\"Gogorengan\",\"products\":[{\"nama\":\"Siomay\",\"harga\":5000,\"rating\": 3.3}, {\"nama\":\"Batagor\",\"harga\":5000,\"rating\": 4.7}, {\"nama\":\"Tahu Bulat\",\"harga\":5000,\"rating\": 3.7}, {\"nama\":\"Roti Maryam\",\"harga\":8000,\"rating\": 2.0}, {\"nama\":\"Jagung Susu Keju\",\"harga\":8000,\"rating\": 4.0}]}, {\"lat\":-6.190845, \"lng\":106.878644, \"Owner\":\"Kevin RK\",\"title\":\"Es krim\",\"products\":[{\"nama\":\"Teh Tarik\",\"harga\":7000,\"rating\": 2.7}, {\"nama\":\"Jus Buah\",\"harga\":10000,\"rating\": 4.0}, {\"nama\":\"Roti Bakar Isi\",\"harga\":12000,\"rating\": 3.0}, {\"nama\":\"Ice Cream\",\"harga\":5000,\"rating\": 5.0}, {\"nama\":\"Es Buah\",\"harga\":6000,\"rating\": 4.0}]}, {\"lat\":-6.186992, \"lng\":106.878483, \"Owner\":\"Kevin RK\",\"title\":\"Es Cendol\",\"products\":[{\"nama\":\"Es Buble\",\"harga\":7000,\"rating\": 4.0}, {\"nama\":\"Es Campur\",\"harga\":8000,\"rating\": 3.7}, {\"nama\":\"Es Doger\",\"harga\":5000,\"rating\": 3.0}]}, {\"lat\":-6.190320, \"lng\":106.881305, \"Owner\":\"Alghi Fari\",\"title\":\"Jus Buah\",\"products\":[{\"nama\":\"Es Campur\",\"harga\":8000,\"rating\": 3.7}, {\"nama\":\"Es Buah\",\"harga\":6000,\"rating\": 4.0}, {\"nama\":\"Es Kelapa Muda\",\"harga\":8000,\"rating\": 4.0}]}, {\"lat\":-6.189701, \"lng\":106.883279, \"Owner\":\"Alghi Fari\",\"title\":\"Piscok Meler\",\"products\":[{\"nama\":\"Piscok Aneka Rasa\",\"harga\":1000,\"rating\": 4.3}]}, {\"lat\":-6.192666, \"lng\":106.880824, \"Owner\":\"Alghi Fari\",\"title\":\"Warung Kopi\",\"products\":[{\"nama\":\"Kopi Hitam\",\"harga\":10000,\"rating\": 4.3}, {\"nama\":\"Espresso\",\"harga\":10000,\"rating\": 4.3}, {\"nama\":\"Black Cappucino\",\"harga\":10000,\"rating\": 4.3}]}, {\"lat\":-6.196534, \"lng\":106.879756, \"Owner\":\"Alghi Fari\",\"title\":\"Tahu Bulat\",\"products\":[{\"nama\":\"Batagor\",\"harga\":5000,\"rating\": 4.7}, {\"nama\":\"Tahu Bulat\",\"harga\":5000,\"rating\": 3.7}]}, {\"lat\":-6.191686, \"lng\":106.884117, \"Owner\":\"Putri Pratiwi\",\"title\":\"Es Es An\",\"products\":[{\"nama\":\"Es Buble\",\"harga\":7000,\"rating\": 4.0}, {\"nama\":\"Es Campur\",\"harga\":8000,\"rating\": 3.7}, {\"nama\":\"Es Doger\",\"harga\":5000,\"rating\": 3.0}, {\"nama\":\"Es Buah\",\"harga\":6000,\"rating\": 4.0}]}, {\"lat\":-6.193585, \"lng\":106.885941, \"Owner\":\"Putri Pratiwi\",\"title\":\"Soto\",\"products\":[{\"nama\":\"Soto Mie\",\"harga\":10000,\"rating\": 2.3}, {\"nama\":\"Jus Buah\",\"harga\":10000,\"rating\": 4.0}, {\"nama\":\"Soft Drink\",\"harga\":7000,\"rating\": 4.7}]}, {\"lat\":-6.193291, \"lng\":106.882950, \"Owner\":\"Putri Pratiwi\",\"title\":\"Es Capcin\",\"products\":[{\"nama\":\"Capcin\",\"harga\":5000,\"rating\": 5.0}]}, {\"lat\":-6.197046, \"lng\":106.869288, \"Owner\":\"Putri Pratiwi\",\"title\":\"Buble\",\"products\":[{\"nama\":\"Es Buble\",\"harga\":7000,\"rating\": 4.0}]}, {\"lat\":-6.203625, \"lng\":106.877703, \"Owner\":\"Putri Pratiwi\",\"title\":\"Nasi Goreng\",\"products\":[{\"nama\":\"Nasi Goreng\",\"harga\":12000,\"rating\": 3.5}, {\"nama\":\"Ayam Bakar\",\"harga\":15000,\"rating\": 4.7}]}]";
-	//var data = "[{\"lat\":-6.196562, \"lng\":106.887132, \"title\":\"Siomay\"}, {\"lat\":-6.195266, \"lng\":106.884707, \"title\":\"bakso\"}, {\"lat\":-6.191677, \"lng\":106.897319, \"title\":\"Mie Ayam\"}, {\"lat\":-6.201596, \"lng\":106.880612, \"title\":\"batagor\"}, {\"lat\":-6.203249, \"lng\":106.878241, \"title\":\"Jasuke\"}, {\"lat\":-6.202572, \"lng\":106.882232, \"title\":\"Cimol\"}, {\"lat\":-6.200919, \"lng\":106.884233, \"title\":\"Kebab\"}, {\"lat\":-6.201319, \"lng\":106.883986, \"title\":\"Ayam bakar\"}, {\"lat\":-6.201522, \"lng\":106.885815, \"title\":\"sate\"}, {\"lat\":-6.200378, \"lng\":106.882279, \"title\":\"gorengan\"}, {\"lat\":-6.190845, \"lng\":106.878644, \"title\":\"Es krim\"}, {\"lat\":-6.186992, \"lng\":106.878483, \"title\":\"Es Cendol\"}, {\"lat\":-6.190320, \"lng\":106.881305, \"title\":\"Jus Buah\"}, {\"lat\":-6.189701, \"lng\":106.883279, \"title\":\"Piscok Meler\"}, {\"lat\":-6.192666, \"lng\":106.880824, \"title\":\"Warung Kopi\"}, {\"lat\":-6.193946, \"lng\":106.881103, \"title\":\"Es Doger\"}, {\"lat\":-6.193909, \"lng\":106.879231, \"title\":\"Es Goyang\"}, {\"lat\":-6.196534, \"lng\":106.879756, \"title\":\"Tahu Bulat\"}, {\"lat\":-6.191686, \"lng\":106.884117, \"title\":\"Es kelapa\"}, {\"lat\":-6.193585, \"lng\":106.885941, \"title\":\"Soto\"}, {\"lat\":-6.197766, \"lng\":106.888695, \"title\":\"Tahu Pedas\"}, {\"lat\":-6.193291, \"lng\":106.882950, \"title\":\"Es Capcin\"}, {\"lat\":-6.197046, \"lng\":106.869288, \"title\":\"Buble\"}, {\"lat\":-6.200182, \"lng\":106.868945, \"title\":\"Brownies)\"}, {\"lat\":-6.203625, \"lng\":106.877703, \"title\":\"Bakpao\"}, {\"lat\":-6.203625, \"lng\":106.877703, \"title\":\"Nasi Goreng\"}]";
+	this.chatdata = null;
 
 	var ratingEl = "<span class=\"rating star-[on]\"></span>";
 	var popularEl = "<a href=\"#\" dti=\"[id]\"><div class=\"item\"><img src=\"assets/images/ic_menu.png\" alt=\"\"><div class=\"name\"><span>[name]</span><div>[rate]</div></div></div></a>";
 	var productEl = "<a href=\"#\"> <div class=\"item\"> <img src=\"assets/images/ic_menu.png\" alt=\"\"> <div class=\"name\"> <span>[name]</span><br> <span>By : <strong>[owner]</strong></span> </div> <div class=\"prod-rating\"> <span>[rate]</span> <img src=\"assets/images/rate-white.png\" alt=\"\"> </div> </div> </a>";
+	var searchentryEl = "<a href=\"#\" class=\"historyitem\" data-text=\"[text]\"><div class=\"searchentry\"><span>[content]</span></div></a>";
+	this.searchData = [];
+	this.markers = [];
 
 	this.init = function(){
 		
@@ -61,6 +112,32 @@ function App(map){
 			obj.closeSellersWindow(true);
 			obj.openProfileWindow(parseInt(sellerid));
 		});
+		$("input[name='searchbar']").keypress(function(e){
+			if(e.which == 13){
+				obj.startSearch($(this).val());
+			}
+		});
+		$("#profile_chatbtn").click(function(){
+			obj.prepareChatWindow($(this).attr("data-seller-target"));
+		});
+		$("#chatinput").keypress(function(e){
+			if(e.which == 13){
+				obj.handleChat($(this).val());
+				$(this).val("");
+			}
+		});
+		$("#chatsendbtn").click(function(){
+			obj.handleChat($("#chatinput").val());
+			$("#chatinput").val("");
+		});
+		$("div.imgprvoverlay").click(function(){
+			obj.closeImgOverlay();
+		});
+		$("#imgthumb > img").click(function(){
+			obj.openImgOverlay($(this).attr("src"));
+		});
+
+
 	};
 	this.getMarkerData = function(){
 		return jQuery.parseJSON(data);
@@ -80,16 +157,164 @@ function App(map){
 				position:{lat:jobj.lat,lng:jobj.lng},
 				title:jobj.title,
 				animation:google.maps.Animation.DROP
-			});			
+			});		
+			this.markers[i].sellerid = i;
 		}
 		
 		for (i = 0;i < this.markers.length;i++){
 			this.markers[i].setMap(map);			
-			this.markers[i].addListener("click",function(e){
-				obj.openProfileWindow(i);
+			this.markers[i].addListener("click",function(e){				
+				obj.openProfileWindow(this.sellerid);
+				this.setAnimation(null);
 			});			
 		}
 
+	};
+	this.appendChatMsg = function(isSending,msg){
+		var bubble = $("<div class=\"row nullmargin\">"
+                            +"<div class=\"col s7 offset-s5 chatbubble\">"
+                                +"<span class=\"timelabel\">[time goes here]</span>"
+                                +"<span class=\"textmsg\"></span>"
+                            +"</div>"
+                        +"</div>");
+		if(isSending == true)
+			bubble.find(".chatbubble").addClass("chat-sent");
+		else
+			bubble.find(".chatbubble").addClass("chat-received");
+
+		var today = new Date();
+		var hour = today.getHours();
+		var mins = today.getMinutes();
+		var secs = today.getSeconds();
+		if (secs <=9){
+			secs = "0" + secs
+		}
+		if (mins <=9){
+			mins = "0" + mins
+		}
+		if (hour <=9){
+			hour = "0" + hour
+		}		
+		
+		bubble.find("span.timelabel").html(hour+":"+mins);
+		bubble.find("span.textmsg").html(msg);
+
+		$("div.chatwindow").append(bubble).animate({scrollTop:$("div.chatwindow")[0].scrollHeight},300);
+		bubble.find(".chatbubble").css({opacity:1});
+	};
+
+	this.handleChat = function(msg){
+		if(this.stringPartOf("telolet",msg)){		
+			var audio = new Sound("./assets/voices/telolet.mp3",100,false);
+			audio.start();
+			audio.init();
+			audio.remove();
+		}
+		var reply = this.getChatReply(msg);
+
+		this.appendChatMsg(true, msg);
+		this.appendChatMsg(false, reply);
+	};
+
+	this.prepareChatWindow = function(sellerid){
+		var sellerdata = this.getMarkerData()[sellerid];
+
+		$("#mcwindow h5.chatwith").html("Chat with "+sellerdata.Owner);
+		$("div.chatwindow").html("");
+	};
+
+	this.getChatReply = function(query){
+		if(this.chatdata == null)
+		{
+			this.chatdata = [];
+			this.chatdata.userreply = jQuery.parseJSON(chatbotdata);
+			this.chatdata.defaultreply = jQuery.parseJSON(chatbotdatadefaults);
+		}
+
+		for(i = 0;i < this.chatdata.userreply.length;i++){
+			
+			for(k = 0;k < this.chatdata.userreply[i].query.length;k++){				
+				if(this.stringPartOf(this.chatdata.userreply[i].query[k],query) == true){
+					
+
+					var randint = parseInt(Math.random() * (this.chatdata.userreply[i].response.length - 1));
+
+					return this.chatdata.userreply[i].response[randint];
+				}
+			}
+		}
+		var randint = parseInt(Math.random() * (this.chatdata.defaultreply.length - 1));
+		return this.chatdata.defaultreply[randint];
+	};
+
+	this.getSearchData = function(){
+		var d = localStorage.getItem("searchdata");
+		if(d == null) return [];
+		if(d.length < 1) return [];
+		return jQuery.parseJSON(d);
+	};
+	this.stringPartOf = function(search, str){
+		return str.toLowerCase().indexOf(search.toLowerCase()) >= 0;
+	}
+	this.saveSearch = function(query){
+		var searchdata = jQuery.parseJSON(localStorage.getItem("searchdata"));
+		if(searchdata == null)
+			searchdata = [];
+		
+		searchdata.push(query);
+
+		localStorage.setItem("searchdata",JSON.stringify(searchdata));
+	};
+	this.startSearch = function(query){
+		//Add to webstorage		
+		this.saveSearch(query);
+
+		var markers = this.getMarkerData();
+
+		if(typeof(google) != "undefined") {
+			for(var i = 0; i < this.markers.length;i++){
+				this.markers[i].setAnimation(null);
+			}
+		}
+
+		//Linear search
+		for (var i = 0; i < markers.length; i++) {
+			if(markers[i].title.toLowerCase() == query.toLowerCase()){
+				this.openProfileWindow(i);
+				return;
+			}
+		};
+
+		//If no exact value
+		Materialize.toast('Tidak ada hasil :(', 3000);
+		console.log("Searching markers" + (typeof(google) == "undefined"));
+		//And maps is exist
+		if(typeof(google) === "undefined") return;
+		var srccount = 0;
+		for (var i = 0; i < markers.length; i++) {
+			//console.log("Search : "+markers[i].title+ " : "+query);
+			if(this.stringPartOf(query,markers[i].title) == true){
+				this.markers[i].setAnimation(google.maps.Animation.BOUNCE);
+				srccount++;
+			}
+		};
+		if(srccount > 0)
+			Materialize.toast('Ada beberapa seller yang mungkin kamu cari! Coba lihat yang lagi lompat lompat', 4000)
+	};
+	this.bindSearchHistoryEntry = function(){
+		var obj = this;
+		$("a.historyitem").click(function(){
+			var text = $(this).attr("data-text");
+
+			$("input[name=searchbar]").val(text);
+
+			obj.closeWindows();
+			var e = jQuery.Event("keypress");
+			e.which = 13;
+			setTimeout(function(){
+				$("input[name=searchbar]").trigger(e);
+			},500);
+		});	
 	};
 
 	this.closeWindows = function(){
@@ -105,20 +330,24 @@ function App(map){
 		if(products_open == true){
 			this.closeProductsWindow();
 		}
+		if(searches_open == true){
+			this.closeSearchWindow();
+		}
 	};
 
 	this.openProfileWindow = function(sellerposid){
 		var markerData = this.getMarkerData();
-		sellerposid = sellerposid || parseInt((Math.random() * markerData.length));		
+		sellerposid = (typeof(sellerposid) === "undefined")?parseInt((Math.random() * markerData.length)):sellerposid;		
 		if (profile_open == true) return;
 
 		$(".mainpart").css("filter","blur(5px)");
-		console.log(markerData[sellerposid]);
+		
 		$("#profile_seller_title").html(markerData[sellerposid].title);
 		$("#profile_seller_tagline").html("Menjual " + markerData[sellerposid].products.length + " Produk");
 		$("#profile_seller_owner").html(markerData[sellerposid].Owner);
 		$("#profile_seller_lastactive").html(parseInt(Math.random() * 10) + " Hours ago");
 		$("#profile_seller_rating").html(this.createRatingForProfile(Math.random() * 5));
+		$("#profile_chatbtn").attr("data-seller-target",sellerposid);
 		$(popupProfile).css({			
 			"display":"block",
 			visibility:"visible"
@@ -282,11 +511,10 @@ function App(map){
 		var listBody = "";
 
 		var markerData = jQuery.parseJSON(data);
-		console.log(markerData.length);
+		
 		for(q = 0;q < markerData.length;q++){
 			var innerBody = popularEl.replace("[name]",markerData[q].title);
-			var rate = this.createRating(parseInt((Math.random() * 10) % 5 + 1));
-			console.log(rate.length);
+			var rate = this.createRating(parseInt((Math.random() * 10) % 5 + 1));			
 			innerBody = innerBody.replace("[rate]",rate);
 			innerBody = innerBody.replace("[id]",q);
 			listBody += innerBody;
@@ -300,12 +528,10 @@ function App(map){
 	this.createPopularProducts = function(){
 		var listBody = "";
 
-		var markerData = this.getMarkerData();
-		console.log(markerData.length);
+		var markerData = this.getMarkerData();		
 		for(q = 0;q < markerData.length;q++){
 			var innerBody = productEl.replace("[owner]",markerData[q].title);
-			var randi = parseInt(Math.random() * (markerData[q].products.length - 1));
-			console.log(markerData[q].products[randi]);
+			var randi = parseInt(Math.random() * (markerData[q].products.length - 1));			
 			innerBody = innerBody.replace("[name]",markerData[q].products[randi].nama);
 			innerBody = innerBody.replace("[rate]",(Math.random() * 5).toFixed(1));
 
@@ -393,4 +619,93 @@ function App(map){
 		}, 300);
 		products_open = false;
 	}
+
+	this.openSearchWindow = function(){				
+		if (searches_open == true) return;
+
+		var searchdata = this.getSearchData();
+		var innerHtml = "";
+
+		for(var i = 0;i < searchdata.length;i++){
+			innerHtml += searchentryEl.replace("[text]",searchdata[i]).replace("[content]",searchdata[i]);
+		}
+
+		$("#searchhistory").html(innerHtml);
+
+		this.bindSearchHistoryEntry();
+
+		$(popupSearchHistory).css({			
+			"display":"block",
+			visibility:"visible"
+		});
+		setTimeout(function() {
+			$(popupSearchHistory).css({
+				opacity:1,
+				top:0
+			});
+		}, 300);
+		$(overlay).css({
+			display:"block"
+		});
+		setTimeout(function() {
+			$(overlay).css({
+				opacity:1				
+			});
+		}, 300);
+		searches_open = true;
+	};
+	this.closeSearchWindow = function(closeoverlay){
+		closeoverlay = typeof(closeoverlay)!= undefined?closeoverlay:true;		
+		if (searches_open == false)return;
+
+		$(".mainpart").css("filter","none");
+
+		$(popupSearchHistory).css({
+			opacity:0,
+			top:"-30px"
+		});
+		setTimeout(function() {
+			$(popupSearchHistory).css({			
+				"display":"none",
+				visibility:"collapsed"
+			});			
+		}, 300);
+		if(!closeoverlay){
+			$(overlay).css({
+				opacity:0				
+			});
+			setTimeout(function() {
+				$(overlay).css({
+					display:"none"
+				});			
+			}, 300);
+		}
+		searches_open = false;
+	}
+	this.openImgOverlay = function(url){
+		console.log(url);
+		$("img#imgprv").attr("src",url);
+		$("img#imgprv, div.imgprvoverlay").css("display","block");
+		setTimeout(function(){	
+			$("img#imgprv, div.imgprvoverlay").css({
+				transform:"scale(1)"
+			});		
+			$("img#imgprv, div.imgprvoverlay").css({
+				opacity:1
+			});
+		},100);
+	};
+	this.closeImgOverlay = function(){
+		$("img#imgprv").css({
+				transform:"scale(0.95)"
+			});
+		$("img#imgprv, div.imgprvoverlay").css({
+			opacity:0
+		});
+		setTimeout(function(){
+			$("img#imgprv, div.imgprvoverlay").css({
+				display:"none"
+			});
+		},100);
+	};
 }

@@ -1,19 +1,24 @@
-
 <html>
     <head>
         <script src="assets/js/jquery.js"></script>
         <script src="assets/js/materialize.js"></script>
+
+        <script src="assets/js/data.js"></script>
         <script src="assets/js/app.js"></script>
-        <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwIe6c43qe6JX2c-M5CiKPd42g5Y9yCWg&callback=initMap">-->
-        </script>
+        <script src="assets/js/app_credential.js"></script>
+        <script src="assets/js/base_functions.js"></script>
+        <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwIe6c43qe6JX2c-M5CiKPd42g5Y9yCWg&callback=initMap"> </script>-->
+        
         <script src="assets/jqui/jquery-ui.min.js"></script>
 
         
 
         <link rel="stylesheet" href="assets/css/materialize.min.css">
         <link rel="stylesheet" href="assets/css/app-main.css">
+        <link rel="stylesheet" href="assets/css/shared.css">
         <link rel="stylesheet" href="assets/jqui/jquery-ui.min.css">
         <link rel="stylesheet" href="assets/jqui/jquery-ui.structure.min.css">
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
 
         <TITLE>AyoJajan!</TITLE>
         <script>
@@ -27,30 +32,126 @@
                 app = new App(map);
                 app.init();
                 app.addMarkers();
-                
 
+                FinishRedirect();
             }
             $(function(){
                 //105
-                $("#map").height($(window).height() - 105 - 90);
+                $("#map").height($(window).height() - ($(window).width() < 750?0:105) - 10);
                 if(!app){
                     app = new App(map);
                     app.init();
                     app.addMarkers();
                 }
-            })
+                FinishRedirect();
+            });
         </script>
     </head>
     <body>
+        <ul class="side-nav fixed hide-on-large-only" id="sidenav">
+            <li>
+                <div class="row" style="margin-top:10px">
+                    <div class="col s12 l3">
+                        <img src="assets/images/ic_person_big_white.png" alt="" id="profpic">
+                    </div>
+                    <div class="col s12 l9">
+                        <span class="accountname">[]]</span>
+                        <span class="accountjoindate">[]</span>
+                        <div class="row">
+                        <div class="col s12">
+                            <a href="#" class="btn black right logoutbtn">Logout</a>
+                        </div>
+                    </div>
+                    </div>                        
+                </div>
+            </li>
+            <li><a href="#" class="btn btn-flat blue lighten-2 ">Nearest<i class="fa fa-location-arrow right"></i></a></li>
+            <li><a href="#" class="btn btn-flat green lighten-2 " onclick="app.openProductsWindow()">Food Rating <i class="fa fa-external-link-square right"></i></a></li>
+            <li><a href="#" class="btn btn-flat amber" onclick="app.openSellersWindow()">Best Sellers <i class="fa fa-star right"></i></a></li>
+            <li><a href="#" class="btn btn-flat green" onclick="app.openSearchWindow()">Search History <i class="fa fa-clock-o right"></i></a></li>
+        </ul>
+        <div class="redirect-overlay">
+            <img src="assets/images/ayojajanlogo.png" alt="" class="redirect-img">
+            <div class="preloader-wrapper big active redirect-preloader">
+              <div class="spinner-layer spinner-blue">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+
+              <div class="spinner-layer spinner-red">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+
+              <div class="spinner-layer spinner-yellow">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+
+              <div class="spinner-layer spinner-green">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>        
+            </div>
+        </div> 
         <div class="row mainpart" style="margin-bottom:0!important">
             <!--Content starts here-->
-            <div class="col offset-l2 l8 s12">
-                <div class="row pageheading">
-                    <div class="col s12 l4">
-                        <img src="assets/images/ayojajanlogo.png" alt="">
+            <div class="col s12 l3 leftbar hide-on-med-and-down">
+                <div class="col s12 links">
+                    <a href="#" class="btn btn-flat blue lighten-2 ">Nearest<i class="fa fa-location-arrow right"></i></a>
+                    <a href="#" class="btn btn-flat green lighten-2 " onclick="app.openProductsWindow()">Food Rating <i class="fa fa-external-link-square right"></i></a>
+                    <a href="#" class="btn btn-flat amber" onclick="app.openSellersWindow()">Best Sellers <i class="fa fa-star right"></i></a>
+                    <a href="#" class="btn btn-flat green" onclick="app.openSearchWindow()">Search History <i class="fa fa-clock-o right"></i></a>
+                </div>
+                <span class="titlebar"><img src="assets/images/ayojajanlogo.png" alt=""></span>
+                <div class="leftbar-content">
+                    <div class="row" style="margin-top:10px">
+                        <div class="col s12 l3">
+                            <img src="assets/images/ic_person_big_white.png" alt="" id="profpic">
+                        </div>
+                        <div class="col s12 l9">
+                            <span class="accountname">[]</span>
+                            <span class="accountjoindate">[]</span>
+                        </div>                        
                     </div>
-                    <div class="col s12 l6 offset-l2">
-                        <ul class="right">
+                    <div class="row">
+                        <div class="col s12">
+                            <a href="#" class="btn black right logoutbtn">Logout</a>
+                        </div>
+                    </div>
+                    <div class="row">                        
+                    </div>
+                </div>
+            </div>
+            <div class="col l9 s12 maincontent">
+                <div class="row pageheading">                    
+                    <div class="col s12 l6 m6">     
+                        <a href="#" data-activates="sidenav" class="button-collapse"><i class="fa fa-navicon hide-on-large-only" style="font-size:30px;"></i></a>                   
+                        <img src="assets/images/ayojajanlogo.png" alt="" class="hide-on-large-only">
+                        <input type="text" placeholder="Search" name="searchbar">
+                    </div>
+                    <div class="col s12 l6 m6">
+                        <ul class="right linkright">
                             <li><a href="#">Apa Itu AyoJajan!</a></li>
                             <li><a href="#">About Us</a></li>
                         </ul>
@@ -58,10 +159,10 @@
                 </div>
                 <div class="row nullmargin card" id="map"></div>
                 <div class="row nullmargin bottombuttons">
-                    <a href="#" class="btn btn-flat blue lighten-2 ">Nearest</a>
+                    <!-- <a href="#" class="btn btn-flat blue lighten-2 ">Nearest</a>
                     <a href="#" class="btn btn-flat green lighten-2 " onclick="app.openProductsWindow()">Food Rating</a>
                     <a href="#" class="btn btn-flat amber" onclick="app.openSellersWindow()">Best Sellers</a>
-                    <a href="#" class="btn btn-flat green right">Riwayat Pencarian</a>
+                    <a href="#" class="btn btn-flat green right" onclick="app.openSearchWindow()">Riwayat Pencarian</a> -->
                 </div>
             </div>
         </div>
@@ -73,6 +174,7 @@
                 <img src="assets/images/logo_notext.png" alt="">
             </div>
             <div class="col s9 l9 headtitle">
+                <a href="#" onclick="app.closeProfileWindow()" class="fa fa-close right closebtn"></a>
                 <h4 id="profile_seller_title">TITLE PEDAGANG</h4>
                 <hr>
                 <small id="profile_seller_tagline">Tagline pedagang</small>
@@ -112,7 +214,7 @@
             </div>
         </div>
         <div class="row normalmargin horizontal-scroll removescroll">
-            <div class="col s12 l12 imgs-horizontal-list">
+            <div class="col s12 l12 imgs-horizontal-list" id="imgthumb">
                 <img src="assets\images\slider\1.jpg" alt="">
                 <img src="assets\images\slider\1.jpg" alt="">
                 <img src="assets\images\slider\1.jpg" alt="">
@@ -128,100 +230,16 @@
                 <a href="#" class="btn cyan expand">Details</a>
             </div>
             <div class="col s6 l6">
-                <a href="#" onclick="app.openChatWindow()" class="btn teal expand">Send Message</a>
+                <a href="#" onclick="app.openChatWindow()" class="btn teal expand" id="profile_chatbtn" data-seller-target="">Send Message</a>
             </div>
         </div>
     </div>
     <div class="popup-window wnd chat">
-        <div class="row nullmargin">
-            <div class="col s12 l3">
-                <div class="row">
-                    <div class="col s12 chatheader">
-                        <img src="assets/images/ic_chat.png" alt="" id="">
-                        <h4>Chats</h4>
-                    </div>
-                </div>
-                <div class="row contactlist">
-                    <div class="col s12">
-                        <div class="row">
-                            <div class="col s12 chatcontact">
-                                <img src="assets/images/ic_person.png" alt="" id="">
-                                <h6>H Irman Syahputra</h6><br>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 chatcontact">
-                                <img src="assets/images/ic_person.png" alt="" id="">
-                                <h6>H Irman Syahputra</h6><br>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 chatcontact">
-                                <img src="assets/images/ic_person.png" alt="" id="">
-                                <h6>H Irman Syahputra</h6><br>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 chatcontact">
-                                <img src="assets/images/ic_person.png" alt="" id="">
-                                <h6>H Irman Syahputra</h6><br>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 chatcontact">
-                                <img src="assets/images/ic_person.png" alt="" id="">
-                                <h6>H Irman Syahputra</h6><br>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 chatcontact">
-                                <img src="assets/images/ic_person.png" alt="" id="">
-                                <h6>H Irman Syahputra</h6><br>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 chatcontact">
-                                <img src="assets/images/ic_person.png" alt="" id="">
-                                <h6>H Irman Syahputra</h6><br>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 chatcontact">
-                                <img src="assets/images/ic_person.png" alt="" id="">
-                                <h6>H Irman Syahputra</h6><br>
-                            </div>
-                        </div>    
-                        <div class="row">
-                            <div class="col s12 chatcontact">
-                                <img src="assets/images/ic_person.png" alt="" id="">
-                                <h6>H Irman Syahputra</h6><br>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 chatcontact">
-                                <img src="assets/images/ic_person.png" alt="" id="">
-                                <h6>H Irman Syahputra</h6><br>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 chatcontact">
-                                <img src="assets/images/ic_person.png" alt="" id="">
-                                <h6>H Irman Syahputra</h6><br>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 chatcontact">
-                                <img src="assets/images/ic_person.png" alt="" id="">
-                                <h6>H Irman Syahputra</h6><br>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col s12 l9" id="mcwindow">
+        <div class="row nullmargin">            
+            <div class="col s12 l12" id="mcwindow">
                 <div class="row nullmargin">
                     <div class="col s12 chatheader">                        
-                        <h5>Chat With H Irman Syahputra</h5>
+                        <h5 class="chatwith">Chat With Seller </h5><a href="#" onclick="app.closeChatWindow(true)" class="fa fa-close right closebtn"></a>
                     </div>
                 </div>
                 <div class="row nullmargin">
@@ -239,117 +257,7 @@
                             </div>
                         </div>
                         <!--START DUMMY-->
-                        <div class="row nullmargin">
-                            <div class="col s7 offset-s5 chatbubble chat-sent">
-                                <span class="timelabel">20:05</span>
-                                aiowduhawiduhawiudhaiwudh
-                            </div>
-                        </div>
-                        <div class="row nullmargin">
-                            <div class="col s7 chatbubble chat-received">
-                                <span class="timelabel">20:06</span>
-                                aiowduhawiduhawiudhaiwudh
-                            </div>
-                        </div><div class="row nullmargin">
-                            <div class="col s7 offset-s5 chatbubble chat-sent">
-                                <span class="timelabel">20:05</span>
-                                aiowduhawiduhawiudhaiwudh
-                            </div>
-                        </div>
-                        <div class="row nullmargin">
-                            <div class="col s7 chatbubble chat-received">
-                                <span class="timelabel">20:06</span>
-                                aiowduhawiduhawiudhaiwudh
-                            </div>
-                        </div><div class="row nullmargin">
-                            <div class="col s7 offset-s5 chatbubble chat-sent">
-                                <span class="timelabel">20:05</span>
-                                aiowduhawiduhawiudhaiwudh
-                            </div>
-                        </div>
-                        <div class="row nullmargin">
-                            <div class="col s7 chatbubble chat-received">
-                                <span class="timelabel">20:06</span>
-                                aiowduhawiduhawiudhaiwudh
-                            </div>
-                        </div><div class="row nullmargin">
-                            <div class="col s7 offset-s5 chatbubble chat-sent">
-                                <span class="timelabel">20:05</span>
-                                aiowduhawiduhawiudhaiwudh
-                            </div>
-                        </div>
-                        <div class="row nullmargin">
-                            <div class="col s7 chatbubble chat-received">
-                                <span class="timelabel">20:06</span>
-                                aiowduhawiduhawiudhaiwudh
-                            </div>
-                        </div><div class="row nullmargin">
-                            <div class="col s7 offset-s5 chatbubble chat-sent">
-                                <span class="timelabel">20:05</span>
-                                aiowduhawiduhawiudhaiwudh
-                            </div>
-                        </div>
-                        <div class="row nullmargin">
-                            <div class="col s7 chatbubble chat-received">
-                                <span class="timelabel">20:06</span>
-                                aiowduhawiduhawiudhaiwudh
-                            </div>
-                        </div><div class="row nullmargin">
-                            <div class="col s7 offset-s5 chatbubble chat-sent">
-                                <span class="timelabel">20:05</span>
-                                aiowduhawiduhawiudhaiwudh
-                            </div>
-                        </div>
-                        <div class="row nullmargin">
-                            <div class="col s7 chatbubble chat-received">
-                                <span class="timelabel">20:06</span>
-                                aiowduhawiduhawiudhaiwudh
-                            </div>
-                        </div><div class="row nullmargin">
-                            <div class="col s7 offset-s5 chatbubble chat-sent">
-                                <span class="timelabel">20:05</span>
-                                aiowduhawiduhawiudhaiwudh
-                            </div>
-                        </div>
-                        <div class="row nullmargin">
-                            <div class="col s7 chatbubble chat-received">
-                                <span class="timelabel">20:06</span>
-                                aiowduhawiduhawiudhaiwudh
-                            </div>
-                        </div><div class="row nullmargin">
-                            <div class="col s7 offset-s5 chatbubble chat-sent">
-                                <span class="timelabel">20:05</span>
-                                aiowduhawiduhawiudhaiwudh
-                            </div>
-                        </div>
-                        <div class="row nullmargin">
-                            <div class="col s7 chatbubble chat-received">
-                                <span class="timelabel">20:06</span>
-                                aiowduhawiduhawiudhaiwudh
-                            </div>
-                        </div><div class="row nullmargin">
-                            <div class="col s7 offset-s5 chatbubble chat-sent">
-                                <span class="timelabel">20:05</span>
-                                aiowduhawiduhawiudhaiwudh
-                            </div>
-                        </div>
-                        <div class="row nullmargin">
-                            <div class="col s7 chatbubble chat-received">
-                                <span class="timelabel">20:06</span>
-                                aiowduhawiduhawiudhaiwudh
-                            </div>
-                        </div><div class="row nullmargin">
-                            <div class="col s7 offset-s5 chatbubble chat-sent">
-                                <span class="timelabel">20:05</span>
-                                aiowduhawiduhawiudhaiwudh
-                            </div>
-                        </div>
-                        <div class="row nullmargin">
-                            <div class="col s7 chatbubble chat-received">
-                                <span class="timelabel">20:06</span>
-                                aiowduhawiduhawiudhaiwudh
-                            </div>
-                        </div>
+                        
                         <!--END DUMMY-->
                     </div>
                 </div>
@@ -358,7 +266,7 @@
                         <input type="text" id="chatinput" placeholder="Type your message">
                     </div>
                     <div class="col s2 l2">
-                        <a href="#" class="expand btn btn-flat green">Send</a>
+                        <a href="#" class="expand btn btn-flat green" id="chatsendbtn">Send</a>
                     </div>
                 </div>
             </div>
@@ -367,7 +275,7 @@
     <div class="popup-window wnd best-sellers">
         <div class="row nullmargin">
             <div class="col s12">
-                <h5>Best Sellers by Rating</h5>
+                <h5>Best Sellers by Rating<a href="#" onclick="app.closeSellersWindow()" class="fa fa-close right closebtn"></a></h5>
             </div>
         </div>
         <div class="row nullmargin best-sellers-list" id="sellerlist">
@@ -387,7 +295,7 @@
     <div class="popup-window wnd best-products">
         <div class="row nullmargin">
             <div class="col s12">
-                <h5>Best Products by Rating</h5>
+                <h5>Best Products by Rating<a href="#" onclick="app.closeProductsWindow()" class="fa fa-close right closebtn"></a></h5>
             </div>
         </div>
         <div class="row nullmargin best-products-list" id="productlist">
@@ -405,5 +313,19 @@
                 </div>
             </a>
         </div>
+    </div>
+    <div class="popup-window wnd searches">
+        <div class="row nullmargin">
+            <div class="col s12">
+                <h5>Search History<a href="#" onclick="app.closeSearchWindow()" class="fa fa-close right closebtn"></a></h5>
+            </div>            
+        </div>
+        <div class="row nullmargin" id="searchhistory">
+            
+        </div>
+        
+    </div>
+    <div class="imgprvoverlay">
+        <img src="" alt="" id="imgprv">
     </div>
 </html>

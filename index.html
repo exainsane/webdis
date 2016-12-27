@@ -2,9 +2,13 @@
     <head>
         <script src="assets/js/jquery.js"></script>
         <script src="assets/js/materialize.min.js"></script>
+        <script src="assets/js/base_functions.js"></script>
         <script src="assets/js/app.js"></script>
+        <script src="assets/js/app_credential.js"></script>
+
 
         <link rel="stylesheet" href="assets/css/materialize.min.css">
+        <link rel="stylesheet" href="assets/css/shared.css">
         <link rel="stylesheet" href="assets/css/app.css">
 
         <script>
@@ -14,10 +18,70 @@
                      indicators:false,
                      height:($(window).height() - $("#header").height())
                     });
+                $("#loginbtn").click(function(e){
+                    e.preventDefault();
+
+                    var username = $("input[name='username']").val();
+                    var password = $("input[name='password']").val();
+
+                    if(Credential.parseLogin(username, password) == true){
+                        PageRedirect("main-mapped.html");
+                    }
+                    else{
+                        $("#loginerrornotify").css("display","block");
+                        setTimeout(function(){
+                            $("#loginerrornotify").css("display","none");
+                        },3000);
+                    }
+                });
             });
         </script>
     </head>
-    <body>        
+    <body>  
+        <div class="redirect-overlay">
+            <img src="assets/images/ayojajanlogo.png" alt="" class="redirect-img">
+            <div class="preloader-wrapper big active redirect-preloader">
+              <div class="spinner-layer spinner-blue">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+
+              <div class="spinner-layer spinner-red">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+
+              <div class="spinner-layer spinner-yellow">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+
+              <div class="spinner-layer spinner-green">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>        
+            </div>
+        </div>      
         <div class="navbar-fixed" id="header">
             <nav class="deep-orange accent-3">
                 <div class="container">
@@ -65,8 +129,8 @@
             <div class="row">
                 <div class="col offset-l2 l8 s12">
                     <div class="row">
-                        <div class="col s12 l2"><img src="assets/images/logo_notext.png" alt=""></div>
-                        <div class="col s12 l10">
+                        <div class="col s3 m2 l2"><img src="assets/images/logo_notext.png" alt=""></div>
+                        <div class="col s9 m10 l10">
                             <h4>Login ke AyoJajan!<br>Dan Temukan Jajanan yang Kamu Cari!</h4>
                         </div>
                     </div>
@@ -82,14 +146,17 @@
                             <div class="row">
                                 <div class="col s12 l6 m6">
                                     <div class="input-field">
-                                        <input type="text">
+                                        <input type="text" name="username">
                                         <label for="">Your Username</label>
                                     </div>
                                     <div class="input-field">
-                                        <input type="password">
+                                        <input type="password" name="password">
                                         <label for="">Your Password</label>
                                     </div>
-                                    <a class="btn btn-flat green white-text" href="main-mapped.html">Log In</a>
+                                    <div id="loginerrornotify" >
+                                        <span class="red-text">Error! Username/password salah</span>
+                                    </div>
+                                    <a class="btn btn-flat green white-text" href="javascript:void(0)" id="loginbtn">Log In</a>
                                 </div>
                                 <div class="col s12 l6 m6" style="border-left:1px solid #ececec">
                                     <div class="input-field">
