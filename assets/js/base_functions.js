@@ -12,12 +12,14 @@ function PageRedirect(url){
 	},100);    
 }
 function FinishRedirect(){
-	$(".redirect-overlay").css({
-		opacity:0,
-		filter:"blur(15px)"
-	});	
-	setTimeout(function(){		
-		$(".redirect-overlay").css("display","none");
-		$("body").css("overflow","auto");
-	},500);    
+	setTimeout(function(){
+		$(".redirect-overlay").css({
+			opacity:0,
+			filter:"blur(15px)"
+		});	
+		setTimeout(function(){		
+			$(".redirect-overlay").css("display","none");
+			$("body").css("overflow","auto");
+		},500);    
+	},1000);
 }
