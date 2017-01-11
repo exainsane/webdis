@@ -9,6 +9,7 @@
         <script src="assets/js/base_functions.js"></script>
 
         
+        <link rel="icon" href="assets/images/logo_notext.png">
 
         <link rel="stylesheet" href="assets/css/materialize.min.css">
         
@@ -44,7 +45,20 @@
                 padding: 10px;
             }
             .profile{
-                position: relative;
+                position: relative;   
+                animation: showUp ease-out .4s alternate;              
+            }
+            @keyframes showUp{
+                from{
+                    margin-top:-40px;
+                    opacity: 0;
+                }
+                
+                to{
+                    margin-top:0px;
+                    opacity: 1;
+                }
+                
             }
             .profile span.name{
                 font-size: 18px;
@@ -60,9 +74,7 @@
         <script>
 			var app;
             var centerpos = {lat:-6.194875, lng:106.883064};            
-            $(function(){
-                $(".scrollspy").scrollSpy();
-                $('.toc-wrapper .wrapper').pushpin({ top: $('.toc-wrapper').offset().top });                
+            $(function(){                                                
             });
         </script>
     </head>

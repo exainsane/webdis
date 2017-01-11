@@ -587,6 +587,9 @@ img#profpic{
     }
 }
 @media screen and (max-width: 600px){
+    div.popup-window.productslist{
+        width: 99%;
+    }
     .pageheading .col img{
         width: 160px;
         margin: 0px auto!important;

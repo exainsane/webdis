@@ -12,6 +12,7 @@
         <!--<script src="assets/jqui/jquery-ui.min.js"></script>-->
 
         
+        <link rel="icon" href="assets/images/logo_notext.png">
 
         <link rel="stylesheet" href="assets/css/materialize.min.css">
         <link rel="stylesheet" href="assets/css/app-main.css">
@@ -30,6 +31,7 @@
             }
             .toc-wrapper{
                 position: relative;
+                animation: fadeIn ease-out .4s alternate;
             }
             .toc-wrapper .wrapper{
                 transition: all .3s ease;
@@ -40,13 +42,38 @@
                 margin: 20px;
                 width: 24%;
             }
+            .infotext{
+                animation: showUp ease-out .4s alternate;
+            }
+            @keyframes showUp{
+                from{
+                    margin-top:40px;
+                    opacity: 0;
+                }
+                
+                to{
+                    margin-top:0px;
+                    opacity: 1;
+                }
+                
+            }
+            @keyframes fadeIn{
+                from{
+                    opacity: 0;
+                }
+                
+                to{
+                    opacity: 1;
+                }
+                
+            }
         </style>
         <script>
 			var app;
             var centerpos = {lat:-6.194875, lng:106.883064};            
             $(function(){
                 $(".scrollspy").scrollSpy();
-                $('.toc-wrapper .wrapper').pushpin({ top: $('.toc-wrapper').offset().top });                
+                $('.toc-wrapper .wrapper').pushpin({ top: $('.toc-wrapper').offset().top });                           
             });
         </script>
     </head>
@@ -54,7 +81,7 @@
         <nav class="black white-text autonav">
             <div class="container">
                 <div class="row">
-                    <div class="col s3 l3 m3">
+                    <div class="col s12 l3 m3">
                         <img src="assets/images/ayojajanlogo.png" alt="" style="width:100%">
                     </div>
                     <div class="col s9 m9 l9">

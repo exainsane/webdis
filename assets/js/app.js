@@ -345,6 +345,9 @@ function App(map){
 		if(searches_open == true){
 			this.closeSearchWindow();
 		}
+		if(productlist_open == true){
+			this.closeProductListWindow();
+		}
 	};
 
 	this.openProfileWindow = function(sellerposid){
@@ -705,14 +708,15 @@ function App(map){
 		if (productlist_open == true) return;
 		
 		var data = this.getMarkerData();
-		data = data[sellerid];
-
+		data = data[sellerid];		
 		if(typeof(data)==="undefined"){
 			Materialize.toast("Data Error!",2500);
 			return;
 		}
 
 		$(".productslist #list").html("");
+
+		$(".productslist .sellername").html(data.Owner);
 
 		for(var i = 0; i < data.products.length;i++){
 			

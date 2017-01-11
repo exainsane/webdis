@@ -3538,9 +3538,13 @@ $(document).ready(function(){
 
               if (windowScroll > (elementOffset + offset)) {
                 if (value.done !== true) {
-                  var callbackFunc = new Function(callback);
-                  callbackFunc();
-                  value.done = true;
+                  if(isString(callback)){
+                    var callbackFunc = new Function(callback);
+                    callbackFunc();
+                    value.done = true;
+                  }else{
+                    callback($(currentElement));
+                  }
                 }
               }
             }
