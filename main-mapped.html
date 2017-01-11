@@ -7,28 +7,29 @@
         <script src="assets/js/app.js"></script>
         <script src="assets/js/app_credential.js"></script>
         <script src="assets/js/base_functions.js"></script>
-        <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwIe6c43qe6JX2c-M5CiKPd42g5Y9yCWg&callback=initMap"> </script>-->
+        <!--<script id="maploaderscript" async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwIe6c43qe6JX2c-M5CiKPd42g5Y9yCWg&callback=initMap"> </script>-->
         
-        <script src="assets/jqui/jquery-ui.min.js"></script>
+        <!--<script src="assets/jqui/jquery-ui.min.js"></script>-->
 
         
 
         <link rel="stylesheet" href="assets/css/materialize.min.css">
         <link rel="stylesheet" href="assets/css/app-main.css">
         <link rel="stylesheet" href="assets/css/shared.css">
-        <link rel="stylesheet" href="assets/jqui/jquery-ui.min.css">
-        <link rel="stylesheet" href="assets/jqui/jquery-ui.structure.min.css">
+        <!--<link rel="stylesheet" href="assets/jqui/jquery-ui.min.css">-->
+        <!--<link rel="stylesheet" href="assets/jqui/jquery-ui.structure.min.css">-->
         <link rel="stylesheet" href="assets/css/font-awesome.min.css">
 
         <TITLE>AyoJajan!</TITLE>
         <script>
 			var app;
-            
+            var centerpos = {lat:-6.194875, lng:106.883064};
             function initMap() {   
                 var map = new google.maps.Map(document.getElementById('map'), {
                     zoom: 15,
-                    center: {lat:-6.194875, lng:106.883064}
+                    center: centerpos
                 });                
+				console.log(map);
                 app = new App(map);
                 app.init();
                 app.addMarkers();
@@ -38,12 +39,14 @@
             $(function(){
                 //105
                 $("#map").height($(window).height() - ($(window).width() < 750?0:105) - 10);
-                if(!app){
-                    app = new App(map);
-                    app.init();
-                    app.addMarkers();
+                if(document.getElementById("maploaderscript") == null){
+                    if(!app){
+                        app = new App(map);
+                        app.init();
+                        app.addMarkers();
+                    }
+                    FinishRedirect();
                 }
-                FinishRedirect();
             });
         </script>
     </head>
@@ -66,7 +69,7 @@
                     </div>                        
                 </div>
             </li>
-            <li><a href="#" class="btn btn-flat blue lighten-2 ">Nearest<i class="fa fa-location-arrow right"></i></a></li>
+            <li><a href="#" class="btn btn-flat blue lighten-2 " onclick="app.center()">Nearest<i class="fa fa-location-arrow right"></i></a></li>
             <li><a href="#" class="btn btn-flat green lighten-2 " onclick="app.openProductsWindow()">Food Rating <i class="fa fa-external-link-square right"></i></a></li>
             <li><a href="#" class="btn btn-flat amber" onclick="app.openSellersWindow()">Best Sellers <i class="fa fa-star right"></i></a></li>
             <li><a href="#" class="btn btn-flat green" onclick="app.openSearchWindow()">Search History <i class="fa fa-clock-o right"></i></a></li>
@@ -119,7 +122,7 @@
             <!--Content starts here-->
             <div class="col s12 l3 leftbar hide-on-med-and-down">
                 <div class="col s12 links">
-                    <a href="#" class="btn btn-flat blue lighten-2 ">Nearest<i class="fa fa-location-arrow right"></i></a>
+                    <a href="#" class="btn btn-flat blue lighten-2 " onclick="app.center()">Nearest<i class="fa fa-location-arrow right"></i></a>
                     <a href="#" class="btn btn-flat green lighten-2 " onclick="app.openProductsWindow()">Food Rating <i class="fa fa-external-link-square right"></i></a>
                     <a href="#" class="btn btn-flat amber" onclick="app.openSellersWindow()">Best Sellers <i class="fa fa-star right"></i></a>
                     <a href="#" class="btn btn-flat green" onclick="app.openSearchWindow()">Search History <i class="fa fa-clock-o right"></i></a>
@@ -154,8 +157,8 @@
                     </div>
                     <div class="col s12 l6 m6">
                         <ul class="right linkright">
-                            <li><a href="#">Apa Itu AyoJajan!</a></li>
-                            <li><a href="#">About Us</a></li>
+                            <li><a href="faq.html"><span class="fa fa-question-circle"></span>&nbsp;Apa Itu AyoJajan!</a></li>
+                            <li><a href="aboutus.html"><span class="fa fa-users"></span>&nbsp;About Us</a></li>
                         </ul>
                     </div>
                 </div>
@@ -217,19 +220,19 @@
         </div>
         <div class="row normalmargin horizontal-scroll removescroll">
             <div class="col s12 l12 imgs-horizontal-list" id="imgthumb">
-                <img src="assets\images\slider\1.jpg" alt="">
-                <img src="assets\images\slider\1.jpg" alt="">
-                <img src="assets\images\slider\1.jpg" alt="">
-                <img src="assets\images\slider\1.jpg" alt="">
-                <img src="assets\images\slider\1.jpg" alt="">
-                <img src="assets\images\slider\1.jpg" alt="">
-                <img src="assets\images\slider\1.jpg" alt="">
-                <img src="assets\images\slider\1.jpg" alt="">
+                <img src="assets\images\products\prd (1).jpg" alt="">
+                <img src="assets\images\products\prd (2).jpg" alt="">
+                <img src="assets\images\products\prd (3).jpg" alt="">
+                <img src="assets\images\products\prd (4).jpg" alt="">
+                <img src="assets\images\products\prd (5).jpg" alt="">
+                <img src="assets\images\products\prd (6).jpg" alt="">
+                <img src="assets\images\products\prd (7).jpg" alt="">
+                <img src="assets\images\products\prd (8).jpg" alt="">
             </div>
         </div>
         <div class="row" id="profilebtns">
             <div class="col s6 l6">
-                <a href="#" class="btn cyan expand">Details</a>
+                <a href="#" onclick="app.openProductListWindow()" id="profile_prdbtn" data-seller-target="" class="btn cyan expand">Details</a>
             </div>
             <div class="col s6 l6">
                 <a href="#" onclick="app.openChatWindow()" class="btn teal expand" id="profile_chatbtn" data-seller-target="">Send Message</a>
@@ -324,6 +327,33 @@
         </div>
         <div class="row nullmargin" id="searchhistory">
             
+        </div>
+        
+    </div>
+    <div class="popup-window wnd productslist">
+        <div class="row nullmargin">
+            <div class="col s12">
+                <h5>Products List<a href="#" onclick="app.closeProductListWindow(true)" class="fa fa-close right closebtn"></a></h5>
+                <small>From seller <i class="sellername">Sellername</i></small>
+            </div>            
+        </div>
+        <div class="row nullmargin" id="list">
+            <div class="card products-card" style="padding:10px;">
+                <div class="row nullmargin">
+                    <div class="col s4"><img src="assets\images\slider\1.jpg" alt="" style="width:100%"></div>
+                    <div class="col s8">
+                        <span class="products-title">Bakso Bakar</span>
+                        <span class="products-price">Rp 12.000</span>
+                        <div class="right">
+                            <span class="rating star-yellow"></span>
+                            <span class="rating star-black"></span>
+                            <span class="rating star-black"></span>
+                            <span class="rating star-black"></span>
+                            <span class="rating star-black"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
     </div>

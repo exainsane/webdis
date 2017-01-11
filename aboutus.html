@@ -1,0 +1,201 @@
+<html>
+    <head>
+        <script src="assets/js/jquery.js"></script>
+        <script src="assets/js/materialize.js"></script>
+
+        <script src="assets/js/data.js"></script>
+        <script src="assets/js/app.js"></script>
+        <script src="assets/js/app_credential.js"></script>
+        <script src="assets/js/base_functions.js"></script>
+
+        
+
+        <link rel="stylesheet" href="assets/css/materialize.min.css">
+        
+        <link rel="stylesheet" href="assets/css/shared.css">
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+        <TITLE>AyoJajan!:About Us</TITLE>
+        <style>
+            .autonav{
+                height: auto!important;
+            }
+            .pin{
+                position: fixed;
+            }
+            .toc-wrapper{
+                position: relative;
+            }
+            .toc-wrapper .wrapper{
+                transition: all .3s ease;
+            }
+            .pinned{
+                position: fixed !important;
+                left: 0;
+                margin: 20px;
+                width: 24%;
+            }
+            .profile img{
+                width: 130;
+                border-radius: 50%;
+                height: 130;
+            }
+            .padding10{
+                padding: 10px;
+            }
+            .profile{
+                position: relative;
+            }
+            .profile span.name{
+                font-size: 18px;
+                position: absolute;
+                right: 19px;
+                z-index: 10;
+                font-style: italic;
+                top: -14px;
+                border-left: 3px solid #03a9f4;
+                padding-left: 5px;
+            }
+        </style>
+        <script>
+			var app;
+            var centerpos = {lat:-6.194875, lng:106.883064};            
+            $(function(){
+                $(".scrollspy").scrollSpy();
+                $('.toc-wrapper .wrapper').pushpin({ top: $('.toc-wrapper').offset().top });                
+            });
+        </script>
+    </head>
+    <body>
+        <nav class="black white-text autonav">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 l3 m3">
+                        <img src="assets/images/ayojajanlogo.png" alt="" style="width:100%">
+                    </div>
+                    <div class="col s9 m9 l9">
+                        <h4 class="right"><span class="fa fa-users"></span>&nbsp;About Us</h4>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="row">
+            <div class="col s12 l9 offset-l3">
+                <a href="index.html"><span class="fa fa-home"></span></a> > <a href="#">About Us</a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <h5 class="center">About Us</h5>
+                    <p class="flow-text center" style="font-size:15px">
+                        
+Team yang mengembangkan project AyoJajan ini semuanya terdiri dari mahasiswa/i Universitas Negeri Jakarta. Semuanya dari program studi Pendidikan Teknologi Informatika dan Komputer angkatan 2015. Project AyoJajan merupakan sebuah assignment dari mata kuliah web design.
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 l6 profiles">                    
+                    <div class="row profile">      
+                        <span class="name">Kevin Ramadhan K</span>                  
+                        <div class="col s3"><img src="assets\images\profile\kevin.jpg" alt=""></div>
+                        <div class="col s9">
+                            <p class="card padding10">
+                                <strong>TTL</strong>: Los Angeles, 14 Januari 1997<br>
+                                <strong>Alamat</strong>: Pondok Tirta Mandala Jl. Murai Ujung No.57, Sukamaju, Cilodong, Depok<br>
+                                <strong>Email</strong>: kiroshinsoul007i@gmail.com<br>
+                                <strong>Instagram</strong>: kiroshin007i<br>
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="row profile">      
+                        <span class="name">Ridwan Achadi Nugroho</span>                  
+                        <div class="col s3"><img src="assets\images\profile\ridwan.jpg" alt=""></div>
+                        <div class="col s9">
+                            <p class="card padding10">
+                                <strong>TTL</strong>: Purbalingga, 11 Mei 1997<br>
+                                <strong>Alamat</strong>: Babakan Tarikolot, Nanggewer, Cibinong Kab. Bogor<br>
+                                <strong>Email</strong>: rnugraha305@gmail.com<br>
+                                <strong>Instagram</strong>: achadi_n<br>
+                            </p>
+
+                        </div>
+                    </div>                    
+                </div>
+                <div class="col s12 l6 profiles">                    
+                    <div class="row profile">      
+                        <span class="name">Alghi Fari Herlambang</span>                  
+                        <div class="col s3"><img src="assets\images\profile\alghi.jpg" alt=""></div>
+                        <div class="col s9">
+                            <p class="card padding10">
+                                <strong>TTL</strong>: Jakarta, 25 Oktober 1997<br>
+                                <strong>Alamat</strong>: Jl. Swadaya Gg. Baru RT/RW 04/03 No. 66 Kelurahan Lubang Buaya, Cipayung<br>
+                                <strong>Email</strong>: alghi.fari@gmail.com<br>
+                                <strong>Instagram</strong>: _al.ghifari_<br>
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="row profile">      
+                        <span class="name">Miftahul Zannah</span>                  
+                        <div class="col s3"><img src="assets\images\profile\miftah.jpg" alt=""></div>
+                        <div class="col s9">
+                            <p class="card padding10">
+                                <strong>TTL</strong>: Jakarta, 14 September 1996<br>
+                                <strong>Alamat</strong>: Jl. Serdang Baru, Kemayoran, Jakarta Pusat<br>
+                                <strong>Email</strong>: gethamitha28@gmail.com<br>
+                                <strong>Instagram</strong>: gethamitha28<br>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 l6 offset-l3">
+                    <div class="row profile">      
+                        <span class="name">Putri Pratiwi</span>                  
+                        <div class="col s3"><img src="assets\images\profile\putri.jpg" alt=""></div>
+                        <div class="col s9">
+                            <p class="card padding10">
+                                <strong>TTL</strong>: Jakarta, ?<br>
+                                <strong>Alamat</strong>: Jl. Paris Cengkareng Jakarta Barat<br>
+                                <strong>Email</strong>: putripratiwi997@gmail.com<br>
+                                <strong>Instagram</strong>: ptrprtiwi<br>
+                                <strong>Path</strong>: Putri Pratiwi
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="page-footer black white-text">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">AyoJajan</h5>
+                <p class="grey-text text-lighten-4">Temukan cara baru dalam menemukan jajanmu!</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Mata Kuliah Desain Web 105</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="#!"><span class="fa fa-user"></span>&nbsp;Alghi Fari Herlambang</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!"><span class="fa fa-user"></span>&nbsp;Kevin Ramadhan K</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!"><span class="fa fa-user"></span>&nbsp;Miftahul Zannah</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!"><span class="fa fa-user"></span>&nbsp;Putri Pratiwi</a></li>
+                  <li><a href="#" class="grey-text text-lighten-3"><span class="fa fa-user"></span>&nbsp;Ridwan Achadi Nugroho</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+                &copy; 2016 Exairie
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+          </div>
+        </footer>
+    </body>
+</html>

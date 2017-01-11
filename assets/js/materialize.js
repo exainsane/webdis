@@ -2355,6 +2355,10 @@ $(document).ready(function(){
 			throttle: 100
 		};
 
+    // if(options.parentElement !== "undefined"){
+    //   jWindow = $(options.parentElement);
+    // }
+
 		offset.top = options.offsetTop || 0;
 		offset.right = options.offsetRight || 0;
 		offset.bottom = options.offsetBottom || 0;

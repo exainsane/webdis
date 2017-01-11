@@ -51,7 +51,7 @@ function Sound(source,volume,loop)
     }
     this.remove=function()
     {
-        document.body.removeChild(this.son);
+        //document.body.removeChild(this.son);
         this.finish=true;
     }
     this.init=function(volume,loop)
@@ -86,13 +86,15 @@ function App(map){
 	var popupBestSellers = ".popup-window.best-sellers";			
 	var popupBestProducts = ".popup-window.best-products";
 	var popupSearchHistory = ".popup-window.searches";
-	var mapobj = map;	
+	var popupProductList = ".popup-window.productslist";
+	this.mapobj = map;	
 	
 	var profile_open = false;
 	var chat_open = false;
 	var sellers_open = false;
 	var products_open = false;	
-	var searches_open = false;	
+	var searches_open = false;
+	var productlist_open = false;	
 
 	this.chatdata = null;
 
@@ -100,11 +102,12 @@ function App(map){
 	var popularEl = "<a href=\"#\" dti=\"[id]\"><div class=\"item\"><img src=\"assets/images/ic_menu.png\" alt=\"\"><div class=\"name\"><span>[name]</span><div>[rate]</div></div></div></a>";
 	var productEl = "<a href=\"#\"> <div class=\"item\"> <img src=\"assets/images/ic_menu.png\" alt=\"\"> <div class=\"name\"> <span>[name]</span><br> <span>By : <strong>[owner]</strong></span> </div> <div class=\"prod-rating\"> <span>[rate]</span> <img src=\"assets/images/rate-white.png\" alt=\"\"> </div> </div> </a>";
 	var searchentryEl = "<a href=\"#\" class=\"historyitem\" data-text=\"[text]\"><div class=\"searchentry\"><span>[content]</span></div></a>";
+	var productslistEl = "<div class=\"card products-card\" style=\"padding:10px;\"><div class=\"row nullmargin\"><div class=\"col s4\"><img src=\"\" alt=\"\" style=\"width:100%\"></div><div class=\"col s8\"><span class=\"products-title\">Bakso Bakar</span><span class=\"products-price\">Rp 12.000</span><div class=\"right\"></div></div></div></div>";
 	this.searchData = [];
 	this.markers = [];
-
+	
 	this.init = function(){
-		
+		//this.mapobj = map;
 		var obj = this;
 		$(overlay).click(function(){
 			obj.closeWindows();
@@ -143,6 +146,11 @@ function App(map){
 
 
 	};
+	this.center = function(){
+		if(typeof(google) !== "undefined"){
+			this.mapobj.setCenter(new google.maps.LatLng(centerpos.lat,centerpos.lng));
+		}
+	}
 	this.getMarkerData = function(){
 		return jQuery.parseJSON(data);
 	};
@@ -352,6 +360,7 @@ function App(map){
 		$("#profile_seller_lastactive").html(parseInt(Math.random() * 10) + " Hours ago");
 		$("#profile_seller_rating").html(this.createRatingForProfile(Math.random() * 5));
 		$("#profile_chatbtn").attr("data-seller-target",sellerposid);
+		$("#profile_prdbtn").attr("data-seller-target",sellerposid);
 		$(popupProfile).css({			
 			"display":"block",
 			visibility:"visible"
@@ -545,7 +554,9 @@ function App(map){
 
 		$("#productlist").html(listBody);
 	}
-	this.createRating = function(rate){				
+	this.createRating = function(rate, ratecolor, ratecoloroff){
+		ratecolor = (typeof(ratecolor) === "undefined"?"black":ratecolor);				
+		ratecoloroff = (typeof(ratecoloroff) === "undefined"?"white":ratecoloroff);
 		var intRate = parseInt(rate);
 
 		intRate = intRate > 5? 5 : intRate;
@@ -554,7 +565,7 @@ function App(map){
 		var rateBody = "";
 
 		for(i = 1;i<=5;i++){
-			rateBody += ratingEl.replace("[on]",(i < rate?"black":"white"));
+			rateBody += ratingEl.replace("[on]",(i < rate?ratecolor:ratecoloroff));
 		}		
 		return rateBody;
 	}
@@ -686,6 +697,92 @@ function App(map){
 		}
 		searches_open = false;
 	}
+	// 
+	this.openProductListWindow = function(sellerid){
+		if(typeof(sellerid) == "undefined"){
+			sellerid = $("#profile_prdbtn").attr("data-seller-target");
+		}				
+		if (productlist_open == true) return;
+		
+		var data = this.getMarkerData();
+		data = data[sellerid];
+
+		if(typeof(data)==="undefined"){
+			Materialize.toast("Data Error!",2500);
+			return;
+		}
+
+		$(".productslist #list").html("");
+
+		for(var i = 0; i < data.products.length;i++){
+			
+			var nama = data.products[i].nama;
+			var harga = "Rp. " + String(data.products[i].harga).replace(/(.)(?=(\d{3})+$)/g,'$1,');
+			var rating = parseFloat(data.products[i].rating);
+
+			console.log("parsing" + nama);
+
+			var img = "assets/images/products/prd (" + (parseInt(Math.random() * 11) + 1) + ").jpg";
+
+			var el = $(productslistEl);
+
+			el.find("img").attr("src",img);
+			el.find(".products-title").html(nama);
+			el.find(".products-price").html(harga);
+			el.find("div.right").html(this.createRating(rating,"yellow","black"));
+			// 
+			$(".productslist #list").append(el);
+		}
+
+		$(popupProductList).css({			
+			"display":"block",
+			visibility:"visible"
+		});
+		setTimeout(function() {
+			$(popupProductList).css({
+				opacity:1,
+				transform:"scale(1)"
+			});
+		}, 300);
+		$(overlay).css({
+			display:"block"
+		});
+		setTimeout(function() {
+			$(overlay).css({
+				opacity:1				
+			});
+		}, 300);
+		productlist_open = true;
+	};
+	this.closeProductListWindow = function(closeoverlay){
+		closeoverlay = typeof(closeoverlay)!= undefined?closeoverlay:true;		
+		if (productlist_open == false)return;
+
+		$(".mainpart").css("filter","none");
+
+		$(popupProductList).css({
+			opacity:0,
+			transform:"scale(0/95)"
+		});
+		setTimeout(function() {
+			$(popupProductList).css({			
+				"display":"none",
+				visibility:"collapsed"
+			});			
+		}, 300);
+		if(!closeoverlay){
+			$(overlay).css({
+				opacity:0				
+			});
+			setTimeout(function() {
+				$(overlay).css({
+					display:"none"
+				});			
+			}, 300);
+		}
+		productlist_open = false;
+	}
+	// 
 	this.openImgOverlay = function(url){
 		console.log(url);
 		$("img#imgprv").attr("src",url);

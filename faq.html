@@ -1,0 +1,157 @@
+<html>
+    <head>
+        <script src="assets/js/jquery.js"></script>
+        <script src="assets/js/materialize.js"></script>
+
+        <script src="assets/js/data.js"></script>
+        <script src="assets/js/app.js"></script>
+        <script src="assets/js/app_credential.js"></script>
+        <script src="assets/js/base_functions.js"></script>
+        <!--<script id="maploaderscript" async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwIe6c43qe6JX2c-M5CiKPd42g5Y9yCWg&callback=initMap"> </script>-->
+        
+        <!--<script src="assets/jqui/jquery-ui.min.js"></script>-->
+
+        
+
+        <link rel="stylesheet" href="assets/css/materialize.min.css">
+        <link rel="stylesheet" href="assets/css/app-main.css">
+        <link rel="stylesheet" href="assets/css/shared.css">
+        <!--<link rel="stylesheet" href="assets/jqui/jquery-ui.min.css">-->
+        <!--<link rel="stylesheet" href="assets/jqui/jquery-ui.structure.min.css">-->
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+        <TITLE>AyoJajan!:FAQ</TITLE>
+        <style>
+            .autonav{
+                height: auto!important;
+            }
+            .pin{
+                position: fixed;
+            }
+            .toc-wrapper{
+                position: relative;
+            }
+            .toc-wrapper .wrapper{
+                transition: all .3s ease;
+            }
+            .pinned{
+                position: fixed !important;
+                left: 0;
+                margin: 20px;
+                width: 24%;
+            }
+        </style>
+        <script>
+			var app;
+            var centerpos = {lat:-6.194875, lng:106.883064};            
+            $(function(){
+                $(".scrollspy").scrollSpy();
+                $('.toc-wrapper .wrapper').pushpin({ top: $('.toc-wrapper').offset().top });                
+            });
+        </script>
+    </head>
+    <body>
+        <nav class="black white-text autonav">
+            <div class="container">
+                <div class="row">
+                    <div class="col s3 l3 m3">
+                        <img src="assets/images/ayojajanlogo.png" alt="" style="width:100%">
+                    </div>
+                    <div class="col s9 m9 l9">
+                        <h4 class="right"><span class="fa fa-question-circle"></span>&nbsp;Frequently Asked Questions</h4>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row">
+                <div class="col s12 l9 offset-l3">
+                    <a href="index.html"><span class="fa fa-home"></span></a> > <a href="#">Faq</a>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col l3 hide-on-med-and-down toc-wrapper">
+                    &nbsp;
+                    <div class="wrapper">
+                        <h5>Contents</h5>
+                        <hr>
+                        <ul class="section table-of-contents">
+                            <li><a href="#whatis">Apa itu AyoJajan!?</a></li>
+                            <li><a href="#howtouse">Bagaimana cara menggunakan AyoJajan!</a></li>
+                            <li><a href="#howtoaccess">Bagaimana saya dapat mengakses web ini?</a></li>
+                            <li><a href="#ordering">Apakah saya bisa memesan makanan dari lokasi saya tanpa harus pergi ke lokasi pedagang?</a></li>
+                            <li><a href="#advantage">Apa keunggulan website AyoJajan!</a></li>
+                            <li><a href="#howtorate">Bagaimana cara memberikan rating untuk pedagang atau jajanannya?</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col s12 l9 infotext">
+                    <div id="whatis" class="section scrollspy">
+                        <h4><span class="fa fa-question-circle blue-text"></span>&nbsp;Apa itu AyoJajan!?</h4>
+                        <p class="flow-text">
+                            AyoJajan adalah portal promosi berjiwa sosial yang bermitra dengan para pedagang baik PKL ataupun warung kecil di Jakarta. Siapapun yang membuka website AyoJajan! dan mencari para pedagang akan melihat usaha berikut data dagangan dan foto pedagang serta lokasi pedagang yang sudah terdaftarkan sebelumya dan jarak relatif mereka dengan posisi pencarian pedagang yang diambil dari sistem GPS di smartphone pencari. Sehingga meskipun pedagang tersebut di relokasi ke tempat yang jauh, usaha mereka akan tetap terlihat di peta dan pengguna website dapat melihat lokasi dari keberadaan mereka.
+                        </p>
+                    </div>
+                    <div id="howtouse" class="section scrollspy">
+                        <h4><span class="fa fa-question-circle blue-text"></span>&nbsp;Bagaimana cara menggunakan AyoJajan!?</h4>
+                        <p class="flow-text">
+                            Dengan menggunakan website AyoJajan!, kamu dapat mengetahui jajanan yang kamu inginkan tanpa harus berjalan kaki mencari makanan disekitarmu. Website ini menggunakan sistem Google Maps yang sudah terintegrasi dengan server AyoJajan! sehingga menampilkan lokasi pedagang dan lokasi user. Anda juga dapat mengetahui jajanan dan pedagang terpopuler dengan meng-klik fitur yang ada di bawah map. Selain itu, anda dapat mengirim pesan online kepada pedagang karena kami juga menyediakan fitur chat.
+                        </p>
+                    </div>
+                    <div id="howtoaccess" class="section scrollspy">
+                        <h4><span class="fa fa-question-circle blue-text"></span>&nbsp;Bagaimana saya dapat mengakses web ini?</h4>
+                        <p class="flow-text">
+                            Website ini dapat diakses melalui smart phone anda hanya dengan menuliskan alamat website “AyoJajan.com”. Setelah membuka website,anda tidak langsung bisa mengakses website ini lebih dalam karena diwajibkan untuk memiliki sebuah akun. Jika anda sudah memiliki akun, anda dapat langsung meng-klik menu Login. Tetapi jika belum, anda dapat meng-klik menu SignUp dan mengisi beberapa keterangan yang harus diisi, kemudian memverifikasikan email anda, baru setelah itu anda dapat menjelajahi web ini.
+                        </p>
+                    </div>
+                    <div id="ordering" class="section scrollspy">
+                        <h4><span class="fa fa-question-circle blue-text"></span>&nbsp;Apakah saya bisa memesan makanan dari lokasi saya tanpa harus pergi ke lokasi pedagang?</h4>
+                        <p class="flow-text">
+                            Aplikasi AyoJajan! tidak menyediakan fitur pemesanan dagangan karena aplikasi ini merupakan website portal promosi, bukan E-Commerce ataupun layanan transportasi. AyoJajan! hanya mempromosikan dagangan para PKL dan pemilik usaha informal yang selama ini mempromosikan dagangan mereka dengan cara tradisional, sehingga jika ingin memesan anda harus menemui pedagang sesuai dengan lokasi yang sudah tertera dalam Map.
+                        </p>
+                    </div>
+                    <div id="advantage" class="section scrollspy">
+                        <h4><span class="fa fa-question-circle blue-text"></span>&nbsp;Apa keunggulan website AyoJajan! ?</h4>
+                        <p class="flow-text">
+                            Anda dapat mencari jajanan yang anda inginkan dan langsung mengetahui lokasinya tanpa harus berkeliling dulu sehingga dapat menghemat waktu dan tenaga anda. 
+                        </p>
+                    </div>
+                    <div id="howtorate" class="section scrollspy">
+                        <h4><span class="fa fa-question-circle blue-text"></span>&nbsp;Bagaimana cara memberikan rating untuk pedagang atau jajanannya?</h4>
+                        <p class="flow-text">
+                            Di akhir layanan, kamu dapat secara otomatis memberikan rating kepada pedagang dan jajanannya. Kami menangani custumer service dengan sangat serius, kami mohon agar anda memberikan rating yang adil dan sejujur-jujurnya.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="page-footer black white-text">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">AyoJajan</h5>
+                <p class="grey-text text-lighten-4">Temukan cara baru dalam menemukan jajanmu!</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Mata Kuliah Desain Web 105</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="#!"><span class="fa fa-user"></span>&nbsp;Alghi Fari Herlambang</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!"><span class="fa fa-user"></span>&nbsp;Kevin Ramadhan K</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!"><span class="fa fa-user"></span>&nbsp;Miftahul Zannah</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!"><span class="fa fa-user"></span>&nbsp;Putri Pratiwi</a></li>
+                  <li><a href="#" class="grey-text text-lighten-3"><span class="fa fa-user"></span>&nbsp;Ridwan Achadi Nugroho</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+                &copy; 2016 Exairie
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+          </div>
+        </footer>
+    </body>
+</html>

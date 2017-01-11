@@ -10,9 +10,13 @@
         <link rel="stylesheet" href="assets/css/materialize.min.css">
         <link rel="stylesheet" href="assets/css/shared.css">
         <link rel="stylesheet" href="assets/css/app.css">
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
 
         <script>
             $(function(){
+                if(Credential.isLoggedIn() == true){
+                    PageRedirect("main-mapped.html");
+                }
                  $('.slider').slider({
                      full_width: true,
                      indicators:false,
@@ -34,6 +38,26 @@
                         },3000);
                     }
                 });
+				$("#regbtn").click(function(e){
+					e.preventDefault();
+					
+					var data = new CredentialInfo();
+					
+					data.name = $("input[name='reg_name']").val();
+					data.password = $("input[name='reg_password']").val();
+					data.email = $("input[name='reg_email']").val();
+					data.username = $("input[name='reg_username']").val();
+					data.join_date = new Date().toLocaleString();
+					
+					if(Credential.addCredential(data) == true){
+						Materialize.toast("Daftar Berhasil!",2000);
+						
+						$("input[name='reg_name']").val("");
+						$("input[name='reg_password']").val("");
+						$("input[name='reg_email']").val("");
+						$("input[name='reg_username']").val("");
+					}
+				});
                 $("#guestloginbtn").click(function(e){
                     e.preventDefault();
                     PageRedirect("main-mapped.html");
@@ -87,12 +111,12 @@
             </div>
         </div>      
         <div class="navbar-fixed" id="header">
-            <nav class="deep-orange accent-3">
+            <nav class="black white-text">
                 <div class="container">
                     <img src="assets/images/ayojajanlogo.png" alt="" id="imgheader">
-                    <ul class="right">
-                        <li><a href="#">Apa itu AyoJajan</a></li>
-                        <li><a href="#">About Us</a></li>
+                    <ul class="right">                        
+                        <li><a href="faq.html"><span class="fa fa-question-circle"></span>&nbsp;Apa Itu AyoJajan!</a></li>
+                        <li><a href="aboutus.html"><span class="fa fa-users"></span>&nbsp;About Us</a></li>
                     </ul>
                 </div>
             </nav>        
@@ -146,7 +170,7 @@
                 <div class="col offset-l2 l8 s12">
                     <div class="card">
                         <div class="card-content">
-                            <blockquote><h4>Login/Register</h4></blockquote>
+                            <blockquote style="border-color:#2196f3"><h4>Login/Register</h4></blockquote>
                             <div class="row">
                                 <div class="col s12 l6 m6">
                                     <div class="input-field">
@@ -159,28 +183,28 @@
                                     </div>
                                     <div id="loginerrornotify" >
                                         <span class="red-text">Error! Username/password salah</span>
-                                    </div>
-                                    <a class="btn btn-flat green white-text" href="javascript:void(0)" id="loginbtn">Log In</a>
-                                    <a class="right btn btn-flat blue white-text" href="javascript:void(0)" id="guestloginbtn">Guest Log In</a>
+                                    </div>                                    
+                                    <a class="btn btn-flat green white-text" href="javascript:void(0)" id="loginbtn"><span class="fa fa-external-link square"></span>&nbsp;Log In</a>
+                                    <a class="right btn btn-flat blue white-text" href="javascript:void(0)" id="guestloginbtn"><span class="fa fa-bookmark"></span>&nbsp;Guest Log In</a>
                                 </div>
                                 <div class="col s12 l6 m6" style="border-left:1px solid #ececec">
                                     <div class="input-field">
-                                        <input type="email">
+                                        <input type="email" name="reg_email">
                                         <label for="">Your Email</label>
                                     </div>
                                     <div class="input-field">
-                                        <input type="text">
+                                        <input type="text" name="reg_username">
                                         <label for="">Pick a Username</label>
                                     </div>
                                     <div class="input-field">
-                                        <input type="password">
+                                        <input type="password" name="reg_password">
                                         <label for="">Pick a Password</label>
                                     </div>
-                                    <div class="input-field">
-                                        <input type="password">
-                                        <label for="">Re-type your Password</label>
+                                    <div class="input-field" >
+                                        <input type="text" name="reg_name">
+                                        <label for="">Your Name</label>
                                     </div>
-                                    <button class="btn btn-flat white-text right red">Sign Up</button>
+                                    <button id="regbtn" class="btn btn-flat white-text right red"><span class="fa fa-plus"></span>&nbsp;Sign Up</button>
                                 </div>
                             </div>
                         </div>
@@ -188,7 +212,7 @@
                 </div>
             </div>
         </div>
-        <footer class="page-footer deep-orange accent-3">
+        <footer class="page-footer black white-text">
           <div class="container">
             <div class="row">
               <div class="col l6 s12">
@@ -198,11 +222,11 @@
               <div class="col l4 offset-l2 s12">
                 <h5 class="white-text">Mata Kuliah Desain Web 105</h5>
                 <ul>
-                  <li><a class="grey-text text-lighten-3" href="#!">Alghi Fari Herlambang</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Kevin Ramadhan K</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Miftahul Zannah</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Putri Pratiwi</a></li>
-                  <li><a href="#" class="grey-text text-lighten-3">Ridwan Achadi Nugroho</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!"><span class="fa fa-user"></span>&nbsp;Alghi Fari Herlambang</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!"><span class="fa fa-user"></span>&nbsp;Kevin Ramadhan K</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!"><span class="fa fa-user"></span>&nbsp;Miftahul Zannah</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!"><span class="fa fa-user"></span>&nbsp;Putri Pratiwi</a></li>
+                  <li><a href="#" class="grey-text text-lighten-3"><span class="fa fa-user"></span>&nbsp;Ridwan Achadi Nugroho</a></li>
                 </ul>
               </div>
             </div>
