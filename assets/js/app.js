@@ -781,7 +781,7 @@ function App(map){
 
 			console.log("parsing" + nama);
 
-			var img = "assets/images/products/prd (" + (parseInt(Math.random() * 11) + 1) + ").jpg";
+			var img = this.getFoodImgName(nama);
 
 			var el = $(productslistEl);
 
