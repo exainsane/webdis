@@ -418,6 +418,10 @@ function App(map){
 			$(".popup-window.wnd.profile .imglist #imgthumb").append("<img src=\""+imgsrc+"\" alt=\"\">");
 			
 		};
+		var obj = this;
+		$("#imgthumb > img").click(function(){
+			obj.openImgOverlay($(this).attr("src"));
+		});
 
 		$(popupProfile).css({			
 			"display":"block",
