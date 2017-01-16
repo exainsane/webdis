@@ -105,7 +105,9 @@ function App(map){
 	var productslistEl = "<div class=\"card products-card\" style=\"padding:10px;\"><div class=\"row nullmargin\"><div class=\"col s4\"><img src=\"\" alt=\"\" style=\"width:100%\"></div><div class=\"col s8\"><span class=\"products-title\">Bakso Bakar</span><span class=\"products-price\">Rp 12.000</span><div class=\"right\"></div></div></div></div>";
 	this.searchData = [];
 	this.markers = [];
-	
+	this.posmark = null;
+	this.poscircle = null;
+
 	this.init = function(){
 		//this.mapobj = map;
 		var obj = this;
@@ -155,6 +157,8 @@ function App(map){
 		return jQuery.parseJSON(data);
 	};
 	this.addMarkers = function(){	
+		var bluedoticon = "assets/images/bluedot.png";
+		var sellerdoticon = "assets/images/logo_notext_small.png";
 		var obj = this;			
 		if(typeof(google) === "undefined"){
 			$("#map").click(function(){
@@ -168,6 +172,7 @@ function App(map){
 			this.markers[i] = new google.maps.Marker({
 				position:{lat:jobj.lat,lng:jobj.lng},
 				title:jobj.title,
+				icon:sellerdoticon,
 				animation:google.maps.Animation.DROP
 			});		
 			this.markers[i].sellerid = i;
@@ -180,6 +185,27 @@ function App(map){
 				this.setAnimation(null);
 			});			
 		}
+		this.posmark = new google.maps.Marker({
+			position:centerpos,
+			shape:{
+				coords:[centerpos.lat,centerpos.lng,100],
+				type:'circle'
+			}			
+		});
+
+		this.posmark.setMap(map);
+
+		this.poscircle = new google.maps.Circle({
+	      strokeColor: '#4285f4',
+	      strokeOpacity: 0.8,
+	      strokeWeight: 2,
+	      fillColor: '#619cfd',
+	      fillOpacity: 0.35,
+	      radius: 70
+	    });
+
+	    this.poscircle.bindTo('center', this.posmark, 'position');
+	    this.poscircle.setMap(map);
 
 	};
 	this.appendChatMsg = function(isSending,msg){
@@ -214,7 +240,23 @@ function App(map){
 		$("div.chatwindow").append(bubble).animate({scrollTop:$("div.chatwindow")[0].scrollHeight},300);
 		bubble.find(".chatbubble").css({opacity:1});
 	};
+	this.boom = function(){
+		var used = [];
+		var m = this.getMarkerData();
+		for(i = 0;i < m.length;i++){
+			var prd = m[i].products;
+			for(j = 0;j < prd.length;j++){
+				var nama = this.getFoodImgName(prd[j].nama);
 
+				if(used.indexOf(nama) == -1)
+				{
+					used.push(nama);
+					console.log(nama);
+				}
+
+			}
+		}
+	}
 	this.handleChat = function(msg){
 		if(this.stringPartOf("telolet",msg)){		
 			var audio = new Sound("./assets/voices/telolet.mp3",100,false);
@@ -349,7 +391,11 @@ function App(map){
 			this.closeProductListWindow();
 		}
 	};
-
+	this.getFoodImgName = function(title){
+		var nt = title.split(" ").join("_").toLowerCase();
+		var imglocation = "assets/images/products/";
+		return imglocation + nt + ".jpg";
+	}
 	this.openProfileWindow = function(sellerposid){
 		var markerData = this.getMarkerData();
 		sellerposid = (typeof(sellerposid) === "undefined")?parseInt((Math.random() * markerData.length)):sellerposid;		
@@ -364,6 +410,15 @@ function App(map){
 		$("#profile_seller_rating").html(this.createRatingForProfile(Math.random() * 5));
 		$("#profile_chatbtn").attr("data-seller-target",sellerposid);
 		$("#profile_prdbtn").attr("data-seller-target",sellerposid);
+
+		$(".popup-window.wnd.profile .imglist #imgthumb").html("");
+
+		for (var i = 0; i < markerData[sellerposid].products.length; i++) {
+			var imgsrc = this.getFoodImgName(markerData[sellerposid].products[i].nama);
+			$(".popup-window.wnd.profile .imglist #imgthumb").append("<img src=\""+imgsrc+"\" alt=\"\">");
+			
+		};
+
 		$(popupProfile).css({			
 			"display":"block",
 			visibility:"visible"
